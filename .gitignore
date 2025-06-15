@@ -1,0 +1,16 @@
+# Ignore PyCharm settings
+.idea/
+
+# Ignore Mac OS files
+.DS_Store
+
+# Ignore Python cache files (if you ever run local servers)
+__pycache__/
+*.pyc
+*.pyo
+
+# Node modules (in case you ever expand to add npm tooling)
+node_modules/
+
+# Environment files
+.env

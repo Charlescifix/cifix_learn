@@ -1,0 +1,1407 @@
+        .neural-electron {
+            filter: drop-shadow(0 0 6px currentColor);
+            opacity: 0.8;
+        }                <!-- More Neural Electrons -->
+                <circle class="neural-electron" r="4" fill="#00D9C0">
+                    <animateMotion dur="2s" repeatCount="indefinite">
+                        <mpath href="#electron1"/>
+                    </animateMotion>
+                </circle>
+                <path id="electron1" d="M 140 110 L 760 590" fill="none"/>
+                
+                <circle class="neural-electron" r="4" fill="#FF6B9D" style="animation-delay: 0.3s">
+                    <animateMotion dur="2.5s" repeatCount="indefinite">
+                        <mpath href="#electron2"/>
+                    </animateMotion>
+                </circle>
+                <path id="electron2" d="M 760 110 L 140 590" fill="none"/>
+                
+                <circle class="neural-electron" r="4" fill="#FFD93D" style="animation-delay: 0.6s">
+                    <animateMotion dur="2s" repeatCount="indefinite">
+                        <mpath href="#electron3"/>
+                    </animateMotion>
+                </circle>
+                <path id="electron3" d="M 450 110 L 140 590" fill="none"/>
+                
+                <circle class="neural-electron" r="4" fill="#5B47B0" style="animation-delay: 0.9s">
+                    <animateMotion dur="2.5s" repeatCount="indefinite">
+                        <mpath href="#electron4"/>
+                    </animateMotion>
+                </circle>
+                <path id="electron4" d="M 450 110 L 760 590" fill="none"/>
+                
+                <circle class="neural-electron" r="4" fill="#00D9C0" style="animation-delay: 1.2s">
+                    <animateMotion dur="3s" repeatCount="indefinite">
+                        <mpath href="#path1"/>
+                    </animateMotion>
+                </circle>
+                
+                <circle class="neural-electron" r="4" fill="#FF6B9D" style="animation-delay: 1.5s">
+                    <animateMotion dur="3s" repeatCount="indefinite">
+                        <mpath href="#path5"/>
+                    </animateMotion>
+                </circle><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gen3Kids - AI Coding for Young Minds</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #5B47B0;
+            --secondary-teal: #00D9C0;
+            --accent-pink: #FF6B9D;
+            --accent-yellow: #FFD93D;
+            --accent-orange: #FF8C42;
+            --accent-blue: #4ECDC4;
+            --bg-cream: #FBF9F7;
+            --text-dark: #2C2C3E;
+            --text-gray: #6B7280;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+            color: var(--text-dark);
+            background-color: var(--bg-cream);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-purple);
+        }
+
+        .portal-button {
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-pink));
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(91, 71, 176, 0.3);
+            display: inline-block;
+        }
+
+        .portal-button:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(91, 71, 176, 0.4);
+        }
+
+        .student-portal {
+            background: linear-gradient(135deg, var(--secondary-teal), var(--accent-blue));
+            box-shadow: 0 5px 20px rgba(0, 217, 192, 0.3);
+        }
+
+        .student-portal:hover {
+            box-shadow: 0 10px 30px rgba(0, 217, 192, 0.4);
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(91, 71, 176, 0.3);
+        }
+
+        /* Bouncy Button Animation */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .bouncy-button {
+            animation: bounce 2s infinite;
+            animation-delay: var(--delay, 0s);
+        }
+
+        .bouncy-button:hover {
+            animation-play-state: paused;
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Gen3Block Background Watermark */
+        .hero::before {
+            content: 'GEN3BLOCK';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 15rem;
+            font-weight: 900;
+            color: rgba(91, 71, 176, 0.03);
+            z-index: 0;
+            white-space: nowrap;
+        }
+
+        .hero-content {
+            flex: 0 0 45%;
+            max-width: 600px;
+            z-index: 10;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-visual {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 600px;
+        }
+
+        /* Interactive Globe */
+        .globe-container {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .globe {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        .globe-sphere {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), transparent),
+                        radial-gradient(circle at 70% 70%, var(--secondary-teal), var(--primary-purple));
+            opacity: 0.15;
+            box-shadow: 
+                inset -20px -20px 40px rgba(0, 0, 0, 0.2),
+                0 0 100px rgba(91, 71, 176, 0.2);
+        }
+
+        /* Code Background Pattern */
+        .globe-code-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            opacity: 0.05;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: var(--primary-purple);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+        }
+
+        .globe-code-bg::before {
+            content: '01010111 01100101 01101100 01100011 01101111 01101101 01100101 00100000 01110100 01101111 00100000 01000111 01100101 01101110 00110011 01001011 01101001 01100100 01110011 00100001 00100000 01010111 01101000 01100101 01110010 01100101 00100000 01000001 01001001 00100000 01101101 01100101 01100101 01110100 01110011 00100000 01100011 01110010 01100101 01100001 01110100 01101001 01110110 01101001 01110100 01111001';
+            word-wrap: break-word;
+            line-height: 1.5;
+        }
+
+        .globe-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .latitude {
+            position: absolute;
+            width: 100%;
+            border: 1px solid rgba(91, 71, 176, 0.1);
+            left: 0;
+        }
+
+        .latitude:nth-child(1) { top: 10%; }
+        .latitude:nth-child(2) { top: 30%; }
+        .latitude:nth-child(3) { top: 50%; }
+        .latitude:nth-child(4) { top: 70%; }
+        .latitude:nth-child(5) { top: 90%; }
+
+        .longitude {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+            border: 1px solid rgba(91, 71, 176, 0.1);
+        }
+
+        .longitude:nth-child(6) { transform: rotateY(30deg); }
+        .longitude:nth-child(7) { transform: rotateY(60deg); }
+        .longitude:nth-child(8) { transform: rotateY(90deg); }
+        .longitude:nth-child(9) { transform: rotateY(120deg); }
+        .longitude:nth-child(10) { transform: rotateY(150deg); }
+
+        /* Connection Points */
+        .connection-point {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--secondary-teal);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--secondary-teal);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .point-1 { top: 20%; left: 30%; animation-delay: 0s; }
+        .point-2 { top: 40%; left: 60%; animation-delay: 0.5s; }
+        .point-3 { top: 60%; left: 40%; animation-delay: 1s; }
+        .point-4 { top: 30%; left: 70%; animation-delay: 1.5s; }
+        .point-5 { top: 70%; left: 20%; animation-delay: 2s; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+        }
+
+        /* Signal Lines */
+        .signal-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--secondary-teal), transparent);
+            transform-origin: left center;
+            animation: signal-move 3s ease-in-out infinite;
+        }
+
+        .signal-1 {
+            top: 25%;
+            left: 30%;
+            width: 200px;
+            transform: rotate(25deg);
+            animation-delay: 0s;
+        }
+
+        .signal-2 {
+            top: 45%;
+            left: 40%;
+            width: 150px;
+            transform: rotate(-30deg);
+            animation-delay: 1s;
+        }
+
+        .signal-3 {
+            top: 65%;
+            left: 20%;
+            width: 180px;
+            transform: rotate(45deg);
+            animation-delay: 2s;
+        }
+
+        @keyframes signal-move {
+            0%, 100% { 
+                transform: scaleX(0) rotate(var(--rotation, 0deg));
+                opacity: 0;
+            }
+            50% { 
+                transform: scaleX(1) rotate(var(--rotation, 0deg));
+                opacity: 1;
+            }
+        }
+
+        /* Orbiting Elements */
+        .orbit-ring {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border: 3px dashed rgba(91, 71, 176, 0.2);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .orbiting-element {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            top: 50%;
+            left: 50%;
+            margin-top: -25px;
+            margin-left: -25px;
+        }
+
+        .orbit-1 { 
+            animation: orbit-sync 20s linear infinite;
+        }
+        .orbit-2 { 
+            animation: orbit-sync 20s linear infinite;
+            animation-delay: -5s;
+        }
+        .orbit-3 { 
+            animation: orbit-sync 20s linear infinite;
+            animation-delay: -10s;
+        }
+        .orbit-4 { 
+            animation: orbit-sync 20s linear infinite;
+            animation-delay: -15s;
+        }
+
+        @keyframes orbit-sync {
+            from {
+                transform: rotate(0deg) translateX(350px) rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg) translateX(350px) rotate(-360deg);
+            }
+        }
+
+        /* Floating AI Notes */
+        .ai-note {
+            position: fixed;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 100;
+            opacity: 0;
+            animation: slideInOut 8s infinite;
+        }
+
+        @keyframes slideInOut {
+            0%, 100% { opacity: 0; transform: translateX(100px); }
+            10%, 90% { opacity: 1; transform: translateX(0); }
+        }
+
+        .note-1 {
+            top: 150px;
+            right: 50px;
+            background: linear-gradient(135deg, #FFE5E5, #FFD3E1);
+            animation-delay: 0s;
+        }
+
+        .note-2 {
+            top: 300px;
+            left: 50px;
+            background: linear-gradient(135deg, #E5F3FF, #D3E4FF);
+            animation-delay: 2s;
+        }
+
+        .note-3 {
+            bottom: 200px;
+            right: 50px;
+            background: linear-gradient(135deg, #E5FFE5, #D3FFE1);
+            animation-delay: 4s;
+        }
+
+        .note-4 {
+            bottom: 100px;
+            left: 50px;
+            background: linear-gradient(135deg, #FFF5E5, #FFE8D3);
+            animation-delay: 6s;
+        }
+
+        /* Programs Section */
+        .programs {
+            padding: 6rem 5%;
+            background: white;
+            position: relative;
+        }
+
+        .programs::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><g opacity="0.05"><rect x="100" y="100" width="200" height="200" rx="20" fill="%235B47B0"/><circle cx="900" cy="300" r="150" fill="%2300D9C0"/><path d="M500 500 L600 400 L700 500 L600 600 Z" fill="%23FF6B9D"/></g></svg>');
+            background-size: cover;
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .programs-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .programs h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .programs-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 4rem;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .program-card {
+            background: white;
+            border-radius: 25px;
+            padding: 2rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .program-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--gradient-1), var(--gradient-2));
+        }
+
+        .program-1::before { --gradient-1: #FF6B9D; --gradient-2: #FD8A8A; }
+        .program-2::before { --gradient-1: #5B47B0; --gradient-2: #7B68EE; }
+        .program-3::before { --gradient-1: #00D9C0; --gradient-2: #00B4A6; }
+        .program-4::before { --gradient-1: #FFD93D; --gradient-2: #FFC93D; }
+        .program-5::before { --gradient-1: #FF8C42; --gradient-2: #FF6B42; }
+        .program-6::before { --gradient-1: #4ECDC4; --gradient-2: #44A39A; }
+
+        .program-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .program-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .program-card ul {
+            list-style: none;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .program-card ul li::before {
+            content: "→ ";
+            color: var(--primary-purple);
+            font-weight: bold;
+        }
+
+        .book-button {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            border: none;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 5%;
+            position: relative;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(251,249,247,1));
+        }
+
+        .features h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            font-weight: 800;
+        }
+
+        .features-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            min-height: 700px;
+        }
+
+        /* Neural Network SVG */
+        .neural-network {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .neural-line {
+            stroke: #E8E8F0;
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 5,5;
+            animation: vibrate 0.3s infinite;
+        }
+
+        @keyframes vibrate {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-1px); }
+            75% { transform: translateX(1px); }
+        }
+
+        .neural-pulse {
+            fill: var(--secondary-teal);
+            r: 3;
+            opacity: 0;
+            animation: pulse-move 3s infinite;
+        }
+
+        @keyframes pulse-move {
+            0% { opacity: 0; offset-distance: 0%; }
+            10%, 90% { opacity: 1; }
+            100% { opacity: 0; offset-distance: 100%; }
+        }
+
+        .feature-card {
+            position: absolute;
+            background: white;
+            border-radius: 25px;
+            padding: 2rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            z-index: 10;
+            width: 280px;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-1 { 
+            top: 0; 
+            left: 0;
+        }
+        .feature-1 .feature-icon { 
+            background: linear-gradient(135deg, #FF6B9D, #FD8A8A); 
+        }
+
+        .feature-2 { 
+            top: 0; 
+            right: 0;
+        }
+        .feature-2 .feature-icon { 
+            background: linear-gradient(135deg, #00D9C0, #00B4A6); 
+        }
+
+        .feature-3 { 
+            bottom: 0; 
+            left: 0;
+        }
+        .feature-3 .feature-icon { 
+            background: linear-gradient(135deg, #FFD93D, #FFC93D); 
+        }
+
+        .feature-4 { 
+            bottom: 0; 
+            right: 0;
+        }
+        .feature-4 .feature-icon { 
+            background: linear-gradient(135deg, #5B47B0, #7B68EE); 
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 5%;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(91, 71, 176, 0.1) 0%, rgba(0, 217, 192, 0.1) 100%);
+            border-radius: 30px;
+            margin: 0 5% 5rem;
+        }
+
+        .cta-section h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Kid-friendly background elements */
+        .robot-bg {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="25" y="20" width="50" height="40" rx="10" fill="%235B47B0" opacity="0.1"/><circle cx="35" cy="35" r="5" fill="%2300D9C0" opacity="0.2"/><circle cx="65" cy="35" r="5" fill="%2300D9C0" opacity="0.2"/><rect x="35" y="70" width="10" height="20" fill="%235B47B0" opacity="0.1"/><rect x="55" y="70" width="10" height="20" fill="%235B47B0" opacity="0.1"/></svg>');
+            background-size: contain;
+            opacity: 0.1;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .robot-1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .robot-2 { top: 60%; right: 10%; animation-delay: 1s; }
+        .robot-3 { bottom: 10%; left: 15%; animation-delay: 2s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* AI Chatbot */
+        .ai-chatbot {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .chatbot-button {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            box-shadow: 0 10px 30px rgba(91, 71, 176, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .chatbot-button:hover {
+            transform: scale(1.1);
+            animation-play-state: paused;
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 90px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            color: white;
+            padding: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-body {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            background: #f9f9f9;
+        }
+
+        .chatbot-message {
+            background: white;
+            padding: 1rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .chatbot-input {
+            padding: 1rem;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 0.95rem;
+        }
+
+        .chatbot-send {
+            background: var(--secondary-teal);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 3rem 5%;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 1rem;
+            color: var(--secondary-teal);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--secondary-teal);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Powered by Gen3Block */
+        .powered-by-container {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .powered-by {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            font-size: 0.9rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            white-space: nowrap;
+            animation: roll-in-out 15s ease-in-out infinite;
+        }
+
+        .powered-by span {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .powered-1 { animation-delay: 0s; }
+        .powered-2 { animation-delay: 5s; }
+        .powered-3 { animation-delay: 10s; }
+
+        @keyframes roll-in-out {
+            0% { left: -300px; }
+            15% { left: 50%; transform: translateX(-50%); }
+            25% { left: 50%; transform: translateX(-50%); }
+            40% { left: 110%; }
+            100% { left: 110%; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-container {
+                min-height: auto;
+            }
+
+            .feature-card {
+                position: relative;
+                width: 100%;
+                margin-bottom: 2rem;
+                top: auto !important;
+                left: auto !important;
+                right: auto !important;
+                bottom: auto !important;
+            }
+
+            .neural-network {
+                display: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .ai-note {
+                display: none;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .chatbot-window {
+                width: 90vw;
+                right: 50%;
+                transform: translateX(50%);
+            }
+
+            .powered-by {
+                font-size: 0.8rem;
+                padding: 0.5rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating AI Notes -->
+    <div class="ai-note note-1">🤖 AI learns from humans!</div>
+    <div class="ai-note note-2">👦 Kids shape the future of AI</div>
+    <div class="ai-note note-3">🧠 Human creativity + AI power</div>
+    <div class="ai-note note-4">🚀 Together we're unstoppable!</div>
+
+    <!-- Background Robots -->
+    <div class="robot-bg robot-1"></div>
+    <div class="robot-bg robot-2"></div>
+    <div class="robot-bg robot-3"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Gen3Kids</div>
+        <div class="nav-links">
+            <a href="#programs">Our Programs</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+            <a href="#" class="portal-button student-portal">Student Portal</a>
+            <a href="#" class="portal-button">Parent Portal</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Where Young Minds <span class="highlight">Master AI</span> Through Code</h1>
+            <p>Book your child's spot in the future! Interactive AI coding programs designed for kids aged 6-14. Choose from 6 amazing programs.</p>
+            <div class="hero-buttons">
+                <a href="#programs" class="cta-button bouncy-button">Book a Program</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="globe-container">
+                <div class="globe">
+                    <div class="globe-sphere"></div>
+                    <div class="globe-code-bg"></div>
+                    <svg class="globe-grid" viewBox="0 0 600 600">
+                        <!-- Globe grid lines -->
+                        <ellipse cx="300" cy="300" rx="290" ry="290" fill="none" stroke="rgba(91, 71, 176, 0.2)" stroke-width="2"/>
+                        <ellipse cx="300" cy="300" rx="290" ry="220" fill="none" stroke="rgba(91, 71, 176, 0.2)" stroke-width="2"/>
+                        <ellipse cx="300" cy="300" rx="290" ry="150" fill="none" stroke="rgba(91, 71, 176, 0.2)" stroke-width="2"/>
+                        <ellipse cx="300" cy="300" rx="290" ry="75" fill="none" stroke="rgba(91, 71, 176, 0.2)" stroke-width="2"/>
+                        
+                        <!-- Longitude lines -->
+                        <path d="M 300 10 Q 150 300 300 590" fill="none" stroke="rgba(91, 71, 176, 0.2)" stroke-width="2"/>
+                        <path d="M 300 10 Q 450 300 300 590" fill="none" stroke="rgba(91, 71, 176, 0.2)" stroke-width="2"/>
+                        <ellipse cx="300" cy="300" rx="220" ry="290" fill="none" stroke="rgba(91, 71, 176, 0.2)" stroke-width="2"/>
+                        <ellipse cx="300" cy="300" rx="150" ry="290" fill="none" stroke="rgba(91, 71, 176, 0.2)" stroke-width="2"/>
+                        <ellipse cx="300" cy="300" rx="75" ry="290" fill="none" stroke="rgba(91, 71, 176, 0.2)" stroke-width="2"/>
+                        
+                        <!-- Continents simplified -->
+                        <path d="M 250 180 Q 300 150 350 170 L 370 220 Q 330 240 280 230 Z" fill="rgba(91, 71, 176, 0.1)" stroke="rgba(91, 71, 176, 0.3)" stroke-width="2"/>
+                        <path d="M 180 300 Q 210 280 230 310 L 220 350 Q 190 340 180 320 Z" fill="rgba(0, 217, 192, 0.1)" stroke="rgba(0, 217, 192, 0.3)" stroke-width="2"/>
+                        <path d="M 330 380 Q 370 370 390 400 L 380 440 Q 350 430 330 410 Z" fill="rgba(255, 107, 157, 0.1)" stroke="rgba(255, 107, 157, 0.3)" stroke-width="2"/>
+                        
+                        <!-- Code symbols -->
+                        <text x="200" y="200" fill="rgba(91, 71, 176, 0.1)" font-family="monospace" font-size="20">&lt;/&gt;</text>
+                        <text x="350" y="300" fill="rgba(0, 217, 192, 0.1)" font-family="monospace" font-size="20">{}</text>
+                        <text x="250" y="400" fill="rgba(255, 107, 157, 0.1)" font-family="monospace" font-size="20">01</text>
+                    </svg>
+                    
+                    <!-- Connection points -->
+                    <div class="connection-point point-1"></div>
+                    <div class="connection-point point-2"></div>
+                    <div class="connection-point point-3"></div>
+                    <div class="connection-point point-4"></div>
+                    <div class="connection-point point-5"></div>
+                    
+                    <!-- Signal lines -->
+                    <div class="signal-line signal-1" style="--rotation: 25deg;"></div>
+                    <div class="signal-line signal-2" style="--rotation: -30deg;"></div>
+                    <div class="signal-line signal-3" style="--rotation: 45deg;"></div>
+                </div>
+                
+                <!-- Orbiting elements -->
+                <div class="orbit-ring"></div>
+                <div class="orbiting-element orbit-1">🤖</div>
+                <div class="orbiting-element orbit-2">💻</div>
+                <div class="orbiting-element orbit-3">🧠</div>
+                <div class="orbiting-element orbit-4">🚀</div>
+            </div>
+        </div>
+        <div class="powered-by-container">
+            <div class="powered-by powered-1">
+                Powered by <span>Gen3Block AI Solution</span>
+            </div>
+            <div class="powered-by powered-2">
+                Powered by <span>Gen3Block AI Solution</span>
+            </div>
+            <div class="powered-by powered-3">
+                Powered by <span>Gen3Block AI Solution</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="programs" id="programs">
+        <div class="programs-container">
+            <h2>Choose Your Adventure!</h2>
+            <p class="programs-subtitle">6 Amazing Programs to Transform Your Child into an AI Leader</p>
+            
+            <div class="programs-grid">
+                <div class="program-card program-1">
+                    <div class="program-icon">🎮</div>
+                    <h3>Game Coding & Development</h3>
+                    <ul>
+                        <li>Teaches logic, rules, problem-solving</li>
+                        <li>Prepares them for algorithmic thinking</li>
+                    </ul>
+                    <button class="book-button bouncy-button" style="--delay: 0.1s">Book Now</button>
+                </div>
+
+                <div class="program-card program-2">
+                    <div class="program-icon">🤖</div>
+                    <h3>AI Coding for Kids</h3>
+                    <ul>
+                        <li>Teaches them how AI works</li>
+                        <li>Understanding models, datasets, ethical use</li>
+                    </ul>
+                    <button class="book-button bouncy-button" style="--delay: 0.2s">Book Now</button>
+                </div>
+
+                <div class="program-card program-3">
+                    <div class="program-icon">🌐</div>
+                    <h3>Web Development & Backend Logic</h3>
+                    <ul>
+                        <li>Building real systems</li>
+                        <li>Understanding full-stack thinking</li>
+                    </ul>
+                    <button class="book-button bouncy-button" style="--delay: 0.3s">Book Now</button>
+                </div>
+
+                <div class="program-card program-4">
+                    <div class="program-icon">⚙️</div>
+                    <h3>Software Engineering Foundations</h3>
+                    <ul>
+                        <li>Algorithms, data structures, version control</li>
+                        <li>Thinking like system architects</li>
+                    </ul>
+                    <button class="book-button bouncy-button" style="--delay: 0.4s">Book Now</button>
+                </div>
+
+                <div class="program-card program-5">
+                    <div class="program-icon">📊</div>
+                    <h3>Data Science & Machine Learning</h3>
+                    <ul>
+                        <li>Teach them how to collect, analyze, and use data</li>
+                        <li>Prepare for real-world AI decision making</li>
+                    </ul>
+                    <button class="book-button bouncy-button" style="--delay: 0.5s">Book Now</button>
+                </div>
+
+                <div class="program-card program-6">
+                    <div class="program-icon">🌟</div>
+                    <h3>AI Ethics, Leadership & Control</h3>
+                    <ul>
+                        <li>Brand new but extremely powerful</li>
+                        <li>Teaches them how to <strong>lead AI</strong>, not just code it</li>
+                        <li>Includes: Responsible AI, Bias & fairness</li>
+                        <li>Designing safe systems, Human-AI collaboration</li>
+                    </ul>
+                    <button class="book-button bouncy-button" style="--delay: 0.6s">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2>How Your Child Learns</h2>
+        <div class="features-container">
+            <!-- Neural Network SVG -->
+            <svg class="neural-network" viewBox="0 0 900 700">
+                <!-- Main connection lines -->
+                <line x1="140" y1="110" x2="760" y2="110" class="neural-line" />
+                <line x1="140" y1="110" x2="140" y2="590" class="neural-line" />
+                <line x1="140" y1="110" x2="760" y2="590" class="neural-line" />
+                <line x1="760" y1="110" x2="140" y2="590" class="neural-line" />
+                <line x1="760" y1="110" x2="760" y2="590" class="neural-line" />
+                <line x1="140" y1="590" x2="760" y2="590" class="neural-line" />
+                
+                <!-- Cross connections -->
+                <line x1="140" y1="110" x2="450" y2="350" class="neural-line" />
+                <line x1="760" y1="110" x2="450" y2="350" class="neural-line" />
+                <line x1="140" y1="590" x2="450" y2="350" class="neural-line" />
+                <line x1="760" y1="590" x2="450" y2="350" class="neural-line" />
+                
+                <!-- Additional neural connections -->
+                <line x1="140" y1="350" x2="760" y2="350" class="neural-line" />
+                <line x1="450" y1="110" x2="450" y2="590" class="neural-line" />
+                <line x1="140" y1="110" x2="450" y2="590" class="neural-line" />
+                <line x1="760" y1="110" x2="450" y2="590" class="neural-line" />
+                <line x1="450" y1="110" x2="140" y2="590" class="neural-line" />
+                <line x1="450" y1="110" x2="760" y2="590" class="neural-line" />
+                
+                <!-- Animated pulses -->
+                <circle class="neural-pulse">
+                    <animateMotion dur="3s" repeatCount="indefinite">
+                        <mpath href="#path1"/>
+                    </animateMotion>
+                </circle>
+                <path id="path1" d="M 140 110 L 760 110" fill="none"/>
+                
+                <circle class="neural-pulse" style="animation-delay: 0.5s">
+                    <animateMotion dur="3s" repeatCount="indefinite">
+                        <mpath href="#path2"/>
+                    </animateMotion>
+                </circle>
+                <path id="path2" d="M 760 110 L 760 590" fill="none"/>
+                
+                <circle class="neural-pulse" style="animation-delay: 1s">
+                    <animateMotion dur="3s" repeatCount="indefinite">
+                        <mpath href="#path3"/>
+                    </animateMotion>
+                </circle>
+                <path id="path3" d="M 140 110 L 450 350" fill="none"/>
+                
+                <circle class="neural-pulse" style="animation-delay: 1.5s">
+                    <animateMotion dur="3s" repeatCount="indefinite">
+                        <mpath href="#path4"/>
+                    </animateMotion>
+                </circle>
+                <path id="path4" d="M 450 110 L 450 590" fill="none"/>
+                
+                <circle class="neural-pulse" style="animation-delay: 2s">
+                    <animateMotion dur="3s" repeatCount="indefinite">
+                        <mpath href="#path5"/>
+                    </animateMotion>
+                </circle>
+                <path id="path5" d="M 140 350 L 760 350" fill="none"/>
+                
+                <circle class="neural-pulse" style="animation-delay: 2.5s">
+                    <animateMotion dur="3s" repeatCount="indefinite">
+                        <mpath href="#path6"/>
+                    </animateMotion>
+                </circle>
+                <path id="path6" d="M 760 590 L 140 590" fill="none"/>
+            </svg>
+
+            <div class="feature-card feature-1">
+                <div class="feature-icon">🤖</div>
+                <h3>AI Assistant</h3>
+                <p>24/7 personalized AI tutor that adapts to your child's learning pace and style</p>
+            </div>
+
+            <div class="feature-card feature-2">
+                <div class="feature-icon">👥</div>
+                <h3>Live Classes</h3>
+                <p>Interactive sessions with expert instructors and peer collaboration</p>
+            </div>
+
+            <div class="feature-card feature-3">
+                <div class="feature-icon">📝</div>
+                <h3>Smart Assignments</h3>
+                <p>Project-based learning with real-world AI applications kids love</p>
+            </div>
+
+            <div class="feature-card feature-4">
+                <div class="feature-icon">📊</div>
+                <h3>Parent Dashboard</h3>
+                <p>Real-time progress tracking and detailed learning analytics</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to Future-Proof Your Child's Education?</h2>
+        <p>Limited spots available for each program. Book now to secure your child's place!</p>
+        <a href="#programs" class="cta-button bouncy-button" style="font-size: 1.2rem; padding: 1rem 3rem;">Choose a Program</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Gen3Kids</h3>
+                <p>Empowering the next generation of AI leaders through innovative coding education.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Programs</h4>
+                <ul>
+                    <li><a href="#">Game Development</a></li>
+                    <li><a href="#">AI Coding</a></li>
+                    <li><a href="#">Web Development</a></li>
+                    <li><a href="#">Data Science</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Parent Portal</a></li>
+                    <li><a href="#">Student Login</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Gen3Kids. All rights reserved. | Powered by Gen3Block AI Solution</p>
+        </div>
+    </footer>
+
+    <!-- AI Chatbot -->
+    <div class="ai-chatbot">
+        <div class="chatbot-window" id="chatbot-window">
+            <div class="chatbot-header">
+                <span>🤖 Gen3 AI Assistant</span>
+                <span style="cursor: pointer;" onclick="document.getElementById('chatbot-window').style.display='none'">✕</span>
+            </div>
+            <div class="chatbot-body">
+                <div class="chatbot-message">
+                    Hi! I'm your AI assistant. I can help you choose the perfect program for your child. What age is your child?
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" placeholder="Type your message...">
+                <button class="chatbot-send">Send</button>
+            </div>
+        </div>
+        <div class="chatbot-button" onclick="document.getElementById('chatbot-window').style.display = document.getElementById('chatbot-window').style.display === 'flex' ? 'none' : 'flex'">
+            🤖
+        </div>
+    </div>
+
+    <script>
+        // Simple chatbot toggle
+        document.querySelector('.chatbot-send').addEventListener('click', function() {
+            const input = document.querySelector('.chatbot-input input');
+            if (input.value.trim()) {
+                const message = document.createElement('div');
+                message.className = 'chatbot-message';
+                message.style.background = '#E8F4FD';
+                message.style.marginLeft = 'auto';
+                message.style.maxWidth = '70%';
+                message.textContent = input.value;
+                document.querySelector('.chatbot-body').appendChild(message);
+                
+                input.value = '';
+                
+                // Simulate AI response
+                setTimeout(() => {
+                    const response = document.createElement('div');
+                    response.className = 'chatbot-message';
+                    response.textContent = 'Thanks for your message! Our team will help you find the perfect program for your child.';
+                    document.querySelector('.chatbot-body').appendChild(response);
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
