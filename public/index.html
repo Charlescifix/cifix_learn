@@ -1,4 +1,24 @@
-        .neural-electron {
+/* SVG Icon Styles */
+        .svg-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .svg-icon-small {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .svg-icon-medium {
+            width: 2rem;
+            height: 2rem;
+        }
+
+        .svg-icon-large {
+            width: 3rem;
+            height: 3rem;
+        }        .neural-electron {
             filter: drop-shadow(0 0 6px currentColor);
             opacity: 0.8;
         }                <!-- More Neural Electrons -->
@@ -8,34 +28,34 @@
                     </animateMotion>
                 </circle>
                 <path id="electron1" d="M 140 110 L 760 590" fill="none"/>
-                
+
                 <circle class="neural-electron" r="4" fill="#FF6B9D" style="animation-delay: 0.3s">
                     <animateMotion dur="2.5s" repeatCount="indefinite">
                         <mpath href="#electron2"/>
                     </animateMotion>
                 </circle>
                 <path id="electron2" d="M 760 110 L 140 590" fill="none"/>
-                
+
                 <circle class="neural-electron" r="4" fill="#FFD93D" style="animation-delay: 0.6s">
                     <animateMotion dur="2s" repeatCount="indefinite">
                         <mpath href="#electron3"/>
                     </animateMotion>
                 </circle>
                 <path id="electron3" d="M 450 110 L 140 590" fill="none"/>
-                
+
                 <circle class="neural-electron" r="4" fill="#5B47B0" style="animation-delay: 0.9s">
                     <animateMotion dur="2.5s" repeatCount="indefinite">
                         <mpath href="#electron4"/>
                     </animateMotion>
                 </circle>
                 <path id="electron4" d="M 450 110 L 760 590" fill="none"/>
-                
+
                 <circle class="neural-electron" r="4" fill="#00D9C0" style="animation-delay: 1.2s">
                     <animateMotion dur="3s" repeatCount="indefinite">
                         <mpath href="#path1"/>
                     </animateMotion>
                 </circle>
-                
+
                 <circle class="neural-electron" r="4" fill="#FF6B9D" style="animation-delay: 1.5s">
                     <animateMotion dur="3s" repeatCount="indefinite">
                         <mpath href="#path5"/>
@@ -274,7 +294,7 @@
             background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), transparent),
                         radial-gradient(circle at 70% 70%, var(--secondary-teal), var(--primary-purple));
             opacity: 0.15;
-            box-shadow: 
+            box-shadow:
                 inset -20px -20px 40px rgba(0, 0, 0, 0.2),
                 0 0 100px rgba(91, 71, 176, 0.2);
         }
@@ -394,11 +414,11 @@
         }
 
         @keyframes signal-move {
-            0%, 100% { 
+            0%, 100% {
                 transform: scaleX(0) rotate(var(--rotation, 0deg));
                 opacity: 0;
             }
-            50% { 
+            50% {
                 transform: scaleX(1) rotate(var(--rotation, 0deg));
                 opacity: 1;
             }
@@ -433,18 +453,18 @@
             margin-left: -25px;
         }
 
-        .orbit-1 { 
+        .orbit-1 {
             animation: orbit-sync 20s linear infinite;
         }
-        .orbit-2 { 
+        .orbit-2 {
             animation: orbit-sync 20s linear infinite;
             animation-delay: -5s;
         }
-        .orbit-3 { 
+        .orbit-3 {
             animation: orbit-sync 20s linear infinite;
             animation-delay: -10s;
         }
-        .orbit-4 { 
+        .orbit-4 {
             animation: orbit-sync 20s linear infinite;
             animation-delay: -15s;
         }
@@ -465,11 +485,22 @@
             padding: 1rem 1.5rem;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 0.85rem;
             z-index: 100;
             opacity: 0;
             animation: slideInOut 8s infinite;
+            max-width: 280px;
+            line-height: 1.4;
+        }
+
+        .ai-note em {
+            color: var(--text-dark);
+            font-style: italic;
+        }
+
+        .ai-note small {
+            color: var(--primary-purple);
+            font-weight: 600;
         }
 
         @keyframes slideInOut {
@@ -519,7 +550,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
+            background-image:
                 url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><g opacity="0.05"><rect x="100" y="100" width="200" height="200" rx="20" fill="%235B47B0"/><circle cx="900" cy="300" r="150" fill="%2300D9C0"/><path d="M500 500 L600 400 L700 500 L600 600 Z" fill="%23FF6B9D"/></g></svg>');
             background-size: cover;
             opacity: 0.5;
@@ -587,8 +618,17 @@
         .program-6::before { --gradient-1: #4ECDC4; --gradient-2: #44A39A; }
 
         .program-icon {
-            font-size: 3rem;
+            font-size: 2rem;
             margin-bottom: 1rem;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .program-icon svg {
+            width: 40px;
+            height: 40px;
         }
 
         .program-card h3 {
@@ -605,9 +645,10 @@
         }
 
         .program-card ul li::before {
-            content: "→ ";
+            content: "• ";
             color: var(--primary-purple);
             font-weight: bold;
+            margin-right: 5px;
         }
 
         .book-button {
@@ -708,36 +749,36 @@
             margin-bottom: 1.5rem;
         }
 
-        .feature-1 { 
-            top: 0; 
+        .feature-1 {
+            top: 0;
             left: 0;
         }
-        .feature-1 .feature-icon { 
-            background: linear-gradient(135deg, #FF6B9D, #FD8A8A); 
+        .feature-1 .feature-icon {
+            background: linear-gradient(135deg, #FF6B9D, #FD8A8A);
         }
 
-        .feature-2 { 
-            top: 0; 
+        .feature-2 {
+            top: 0;
             right: 0;
         }
-        .feature-2 .feature-icon { 
-            background: linear-gradient(135deg, #00D9C0, #00B4A6); 
+        .feature-2 .feature-icon {
+            background: linear-gradient(135deg, #00D9C0, #00B4A6);
         }
 
-        .feature-3 { 
-            bottom: 0; 
+        .feature-3 {
+            bottom: 0;
             left: 0;
         }
-        .feature-3 .feature-icon { 
-            background: linear-gradient(135deg, #FFD93D, #FFC93D); 
+        .feature-3 .feature-icon {
+            background: linear-gradient(135deg, #FFD93D, #FFC93D);
         }
 
-        .feature-4 { 
-            bottom: 0; 
+        .feature-4 {
+            bottom: 0;
             right: 0;
         }
-        .feature-4 .feature-icon { 
-            background: linear-gradient(135deg, #5B47B0, #7B68EE); 
+        .feature-4 .feature-icon {
+            background: linear-gradient(135deg, #5B47B0, #7B68EE);
         }
 
         .feature-card h3 {
@@ -1044,10 +1085,22 @@
 </head>
 <body>
     <!-- Floating AI Notes -->
-    <div class="ai-note note-1">🤖 AI learns from humans!</div>
-    <div class="ai-note note-2">👦 Kids shape the future of AI</div>
-    <div class="ai-note note-3">🧠 Human creativity + AI power</div>
-    <div class="ai-note note-4">🚀 Together we're unstoppable!</div>
+    <div class="ai-note note-1">
+        <em>"AI will transform education in ways we're just beginning to imagine"</em><br>
+        <small>- Dr. Sarah Chen, MIT</small>
+    </div>
+    <div class="ai-note note-2">
+        <em>"Kids who learn AI today will lead tomorrow's world"</em><br>
+        <small>- Prof. James Liu, Stanford</small>
+    </div>
+    <div class="ai-note note-3">
+        <em>"The future belongs to those who blend creativity with technology"</em><br>
+        <small>- Maria Rodriguez, Google AI</small>
+    </div>
+    <div class="ai-note note-4">
+        <em>"Every child deserves to understand the AI shaping their future"</em><br>
+        <small>- Dr. Ahmed Hassan, OpenAI</small>
+    </div>
 
     <!-- Background Robots -->
     <div class="robot-bg robot-1"></div>
@@ -1086,44 +1139,71 @@
                         <ellipse cx="300" cy="300" rx="290" ry="220" fill="none" stroke="rgba(91, 71, 176, 0.2)" stroke-width="2"/>
                         <ellipse cx="300" cy="300" rx="290" ry="150" fill="none" stroke="rgba(91, 71, 176, 0.2)" stroke-width="2"/>
                         <ellipse cx="300" cy="300" rx="290" ry="75" fill="none" stroke="rgba(91, 71, 176, 0.2)" stroke-width="2"/>
-                        
+
                         <!-- Longitude lines -->
                         <path d="M 300 10 Q 150 300 300 590" fill="none" stroke="rgba(91, 71, 176, 0.2)" stroke-width="2"/>
                         <path d="M 300 10 Q 450 300 300 590" fill="none" stroke="rgba(91, 71, 176, 0.2)" stroke-width="2"/>
                         <ellipse cx="300" cy="300" rx="220" ry="290" fill="none" stroke="rgba(91, 71, 176, 0.2)" stroke-width="2"/>
                         <ellipse cx="300" cy="300" rx="150" ry="290" fill="none" stroke="rgba(91, 71, 176, 0.2)" stroke-width="2"/>
                         <ellipse cx="300" cy="300" rx="75" ry="290" fill="none" stroke="rgba(91, 71, 176, 0.2)" stroke-width="2"/>
-                        
+
                         <!-- Continents simplified -->
                         <path d="M 250 180 Q 300 150 350 170 L 370 220 Q 330 240 280 230 Z" fill="rgba(91, 71, 176, 0.1)" stroke="rgba(91, 71, 176, 0.3)" stroke-width="2"/>
                         <path d="M 180 300 Q 210 280 230 310 L 220 350 Q 190 340 180 320 Z" fill="rgba(0, 217, 192, 0.1)" stroke="rgba(0, 217, 192, 0.3)" stroke-width="2"/>
                         <path d="M 330 380 Q 370 370 390 400 L 380 440 Q 350 430 330 410 Z" fill="rgba(255, 107, 157, 0.1)" stroke="rgba(255, 107, 157, 0.3)" stroke-width="2"/>
-                        
+
                         <!-- Code symbols -->
                         <text x="200" y="200" fill="rgba(91, 71, 176, 0.1)" font-family="monospace" font-size="20">&lt;/&gt;</text>
                         <text x="350" y="300" fill="rgba(0, 217, 192, 0.1)" font-family="monospace" font-size="20">{}</text>
                         <text x="250" y="400" fill="rgba(255, 107, 157, 0.1)" font-family="monospace" font-size="20">01</text>
                     </svg>
-                    
+
                     <!-- Connection points -->
                     <div class="connection-point point-1"></div>
                     <div class="connection-point point-2"></div>
                     <div class="connection-point point-3"></div>
                     <div class="connection-point point-4"></div>
                     <div class="connection-point point-5"></div>
-                    
+
                     <!-- Signal lines -->
                     <div class="signal-line signal-1" style="--rotation: 25deg;"></div>
                     <div class="signal-line signal-2" style="--rotation: -30deg;"></div>
                     <div class="signal-line signal-3" style="--rotation: 45deg;"></div>
                 </div>
-                
+
                 <!-- Orbiting elements -->
                 <div class="orbit-ring"></div>
-                <div class="orbiting-element orbit-1">🤖</div>
-                <div class="orbiting-element orbit-2">💻</div>
-                <div class="orbiting-element orbit-3">🧠</div>
-                <div class="orbiting-element orbit-4">🚀</div>
+                <div class="orbiting-element orbit-1">
+                    <svg class="svg-icon svg-icon-medium" viewBox="0 0 24 24" fill="#5B47B0">
+                        <circle cx="12" cy="10" r="6"/>
+                        <circle cx="10" cy="9" r="1" fill="white"/>
+                        <circle cx="14" cy="9" r="1" fill="white"/>
+                        <rect x="8" y="16" width="8" height="4" rx="1"/>
+                    </svg>
+                </div>
+                <div class="orbiting-element orbit-2">
+                    <svg class="svg-icon svg-icon-medium" viewBox="0 0 24 24" fill="#00D9C0">
+                        <rect x="3" y="5" width="18" height="14" rx="2"/>
+                        <rect x="6" y="8" width="12" height="8" fill="white"/>
+                        <path d="M8 10h8M8 12h8M8 14h6" stroke="#00D9C0" stroke-width="1"/>
+                    </svg>
+                </div>
+                <div class="orbiting-element orbit-3">
+                    <svg class="svg-icon svg-icon-medium" viewBox="0 0 24 24" fill="#FF6B9D">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10" fill="none" stroke="white" stroke-width="2"/>
+                        <circle cx="8" cy="10" r="1" fill="white"/>
+                        <circle cx="16" cy="10" r="1" fill="white"/>
+                        <path d="M8 15Q12 18 16 15" stroke="white" fill="none" stroke-width="1.5"/>
+                    </svg>
+                </div>
+                <div class="orbiting-element orbit-4">
+                    <svg class="svg-icon svg-icon-medium" viewBox="0 0 24 24" fill="#FFD93D">
+                        <path d="M12 2L2 19h20L12 2z"/>
+                        <path d="M12 6l6 10H6l6-10z" fill="white"/>
+                        <circle cx="12" cy="12" r="1" fill="#FFD93D"/>
+                    </svg>
+                </div>
             </div>
         </div>
         <div class="powered-by-container">
@@ -1144,10 +1224,17 @@
         <div class="programs-container">
             <h2>Choose Your Adventure!</h2>
             <p class="programs-subtitle">6 Amazing Programs to Transform Your Child into an AI Leader</p>
-            
+
             <div class="programs-grid">
                 <div class="program-card program-1">
-                    <div class="program-icon">🎮</div>
+                    <div class="program-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <rect x="4" y="6" width="16" height="12" rx="2" fill="#FF6B9D"/>
+                            <circle cx="8" cy="10" r="1" fill="white"/>
+                            <circle cx="12" cy="10" r="1" fill="white"/>
+                            <rect x="7" y="14" width="10" height="2" rx="1" fill="white"/>
+                        </svg>
+                    </div>
                     <h3>Game Coding & Development</h3>
                     <ul>
                         <li>Teaches logic, rules, problem-solving</li>
@@ -1157,7 +1244,17 @@
                 </div>
 
                 <div class="program-card program-2">
-                    <div class="program-icon">🤖</div>
+                    <div class="program-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <circle cx="12" cy="10" r="6" fill="#5B47B0"/>
+                            <circle cx="10" cy="9" r="1" fill="white"/>
+                            <circle cx="14" cy="9" r="1" fill="white"/>
+                            <path d="M9 12 Q12 14 15 12" stroke="white" fill="none" stroke-width="0.5"/>
+                            <rect x="8" y="16" width="8" height="4" rx="1" fill="#5B47B0"/>
+                            <rect x="10" y="20" width="1" height="2" fill="#5B47B0"/>
+                            <rect x="13" y="20" width="1" height="2" fill="#5B47B0"/>
+                        </svg>
+                    </div>
                     <h3>AI Coding for Kids</h3>
                     <ul>
                         <li>Teaches them how AI works</li>
@@ -1167,7 +1264,15 @@
                 </div>
 
                 <div class="program-card program-3">
-                    <div class="program-icon">🌐</div>
+                    <div class="program-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <circle cx="12" cy="12" r="10" fill="#00D9C0"/>
+                            <circle cx="12" cy="12" r="7" fill="white"/>
+                            <path d="M8 12h8M12 8v8" stroke="#00D9C0" stroke-width="2"/>
+                            <circle cx="16" cy="8" r="1" fill="#00D9C0"/>
+                            <circle cx="8" cy="16" r="1" fill="#00D9C0"/>
+                        </svg>
+                    </div>
                     <h3>Web Development & Backend Logic</h3>
                     <ul>
                         <li>Building real systems</li>
@@ -1177,7 +1282,16 @@
                 </div>
 
                 <div class="program-card program-4">
-                    <div class="program-icon">⚙️</div>
+                    <div class="program-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <circle cx="12" cy="12" r="10" fill="#FFD93D"/>
+                            <path d="M8 8h3v3h2v-3h3v8h-3v-3h-2v3h-3z" fill="white"/>
+                            <circle cx="12" cy="5" r="1" fill="white"/>
+                            <circle cx="5" cy="12" r="1" fill="white"/>
+                            <circle cx="19" cy="12" r="1" fill="white"/>
+                            <circle cx="12" cy="19" r="1" fill="white"/>
+                        </svg>
+                    </div>
                     <h3>Software Engineering Foundations</h3>
                     <ul>
                         <li>Algorithms, data structures, version control</li>
@@ -1187,7 +1301,15 @@
                 </div>
 
                 <div class="program-card program-5">
-                    <div class="program-icon">📊</div>
+                    <div class="program-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <rect x="3" y="14" width="4" height="7" fill="#FF8C42"/>
+                            <rect x="8" y="10" width="4" height="11" fill="#FF8C42"/>
+                            <rect x="13" y="6" width="4" height="15" fill="#FF8C42"/>
+                            <rect x="18" y="3" width="4" height="18" fill="#FF8C42"/>
+                            <path d="M3 13 L8 9 L13 5 L22 2" stroke="white" fill="none" stroke-width="1"/>
+                        </svg>
+                    </div>
                     <h3>Data Science & Machine Learning</h3>
                     <ul>
                         <li>Teach them how to collect, analyze, and use data</li>
@@ -1197,7 +1319,17 @@
                 </div>
 
                 <div class="program-card program-6">
-                    <div class="program-icon">🌟</div>
+                    <div class="program-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2 L22 12 L12 22 L2 12 Z" fill="#4ECDC4"/>
+                            <circle cx="12" cy="12" r="4" fill="white"/>
+                            <path d="M12 8 L15 12 L12 16 L9 12 Z" fill="#4ECDC4"/>
+                            <circle cx="12" cy="6" r="1" fill="white"/>
+                            <circle cx="18" cy="12" r="1" fill="white"/>
+                            <circle cx="12" cy="18" r="1" fill="white"/>
+                            <circle cx="6" cy="12" r="1" fill="white"/>
+                        </svg>
+                    </div>
                     <h3>AI Ethics, Leadership & Control</h3>
                     <ul>
                         <li>Brand new but extremely powerful</li>
@@ -1224,13 +1356,13 @@
                 <line x1="760" y1="110" x2="140" y2="590" class="neural-line" />
                 <line x1="760" y1="110" x2="760" y2="590" class="neural-line" />
                 <line x1="140" y1="590" x2="760" y2="590" class="neural-line" />
-                
+
                 <!-- Cross connections -->
                 <line x1="140" y1="110" x2="450" y2="350" class="neural-line" />
                 <line x1="760" y1="110" x2="450" y2="350" class="neural-line" />
                 <line x1="140" y1="590" x2="450" y2="350" class="neural-line" />
                 <line x1="760" y1="590" x2="450" y2="350" class="neural-line" />
-                
+
                 <!-- Additional neural connections -->
                 <line x1="140" y1="350" x2="760" y2="350" class="neural-line" />
                 <line x1="450" y1="110" x2="450" y2="590" class="neural-line" />
@@ -1238,7 +1370,7 @@
                 <line x1="760" y1="110" x2="450" y2="590" class="neural-line" />
                 <line x1="450" y1="110" x2="140" y2="590" class="neural-line" />
                 <line x1="450" y1="110" x2="760" y2="590" class="neural-line" />
-                
+
                 <!-- Animated pulses -->
                 <circle class="neural-pulse">
                     <animateMotion dur="3s" repeatCount="indefinite">
@@ -1246,35 +1378,35 @@
                     </animateMotion>
                 </circle>
                 <path id="path1" d="M 140 110 L 760 110" fill="none"/>
-                
+
                 <circle class="neural-pulse" style="animation-delay: 0.5s">
                     <animateMotion dur="3s" repeatCount="indefinite">
                         <mpath href="#path2"/>
                     </animateMotion>
                 </circle>
                 <path id="path2" d="M 760 110 L 760 590" fill="none"/>
-                
+
                 <circle class="neural-pulse" style="animation-delay: 1s">
                     <animateMotion dur="3s" repeatCount="indefinite">
                         <mpath href="#path3"/>
                     </animateMotion>
                 </circle>
                 <path id="path3" d="M 140 110 L 450 350" fill="none"/>
-                
+
                 <circle class="neural-pulse" style="animation-delay: 1.5s">
                     <animateMotion dur="3s" repeatCount="indefinite">
                         <mpath href="#path4"/>
                     </animateMotion>
                 </circle>
                 <path id="path4" d="M 450 110 L 450 590" fill="none"/>
-                
+
                 <circle class="neural-pulse" style="animation-delay: 2s">
                     <animateMotion dur="3s" repeatCount="indefinite">
                         <mpath href="#path5"/>
                     </animateMotion>
                 </circle>
                 <path id="path5" d="M 140 350 L 760 350" fill="none"/>
-                
+
                 <circle class="neural-pulse" style="animation-delay: 2.5s">
                     <animateMotion dur="3s" repeatCount="indefinite">
                         <mpath href="#path6"/>
@@ -1284,25 +1416,53 @@
             </svg>
 
             <div class="feature-card feature-1">
-                <div class="feature-icon">🤖</div>
+                <div class="feature-icon">
+                    <svg class="svg-icon svg-icon-medium" viewBox="0 0 24 24" fill="white">
+                        <circle cx="12" cy="10" r="6"/>
+                        <circle cx="10" cy="9" r="1" fill="#FF6B9D"/>
+                        <circle cx="14" cy="9" r="1" fill="#FF6B9D"/>
+                        <path d="M9 12 Q12 14 15 12" stroke="#FF6B9D" fill="none"/>
+                        <rect x="8" y="16" width="8" height="4" rx="1"/>
+                    </svg>
+                </div>
                 <h3>AI Assistant</h3>
                 <p>24/7 personalized AI tutor that adapts to your child's learning pace and style</p>
             </div>
 
             <div class="feature-card feature-2">
-                <div class="feature-icon">👥</div>
+                <div class="feature-icon">
+                    <svg class="svg-icon svg-icon-medium" viewBox="0 0 24 24" fill="white">
+                        <circle cx="8" cy="10" r="4"/>
+                        <path d="M8 15c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        <circle cx="16" cy="10" r="4"/>
+                        <path d="M16 15c2.67 0 8 1.34 8 4v2h-8z" opacity="0.5"/>
+                    </svg>
+                </div>
                 <h3>Live Classes</h3>
                 <p>Interactive sessions with expert instructors and peer collaboration</p>
             </div>
 
             <div class="feature-card feature-3">
-                <div class="feature-icon">📝</div>
+                <div class="feature-icon">
+                    <svg class="svg-icon svg-icon-medium" viewBox="0 0 24 24" fill="white">
+                        <rect x="4" y="6" width="16" height="12" rx="2" stroke="white" stroke-width="2" fill="none"/>
+                        <path d="M7 10h10M7 14h10" stroke="white" stroke-width="1.5"/>
+                        <circle cx="20" cy="6" r="3" fill="#FF6B9D"/>
+                    </svg>
+                </div>
                 <h3>Smart Assignments</h3>
                 <p>Project-based learning with real-world AI applications kids love</p>
             </div>
 
             <div class="feature-card feature-4">
-                <div class="feature-icon">📊</div>
+                <div class="feature-icon">
+                    <svg class="svg-icon svg-icon-medium" viewBox="0 0 24 24" fill="white">
+                        <rect x="3" y="14" width="4" height="7"/>
+                        <rect x="8" y="10" width="4" height="11"/>
+                        <rect x="13" y="6" width="4" height="15"/>
+                        <rect x="18" y="3" width="4" height="18"/>
+                    </svg>
+                </div>
                 <h3>Parent Dashboard</h3>
                 <p>Real-time progress tracking and detailed learning analytics</p>
             </div>
@@ -1360,8 +1520,17 @@
     <div class="ai-chatbot">
         <div class="chatbot-window" id="chatbot-window">
             <div class="chatbot-header">
-                <span>🤖 Gen3 AI Assistant</span>
-                <span style="cursor: pointer;" onclick="document.getElementById('chatbot-window').style.display='none'">✕</span>
+                <span style="display: flex; align-items: center;">
+                    <svg class="svg-icon svg-icon-small" style="margin-right: 8px;" viewBox="0 0 24 24" fill="white">
+                        <circle cx="12" cy="10" r="6"/>
+                        <circle cx="10" cy="9" r="1" fill="#5B47B0"/>
+                        <circle cx="14" cy="9" r="1" fill="#5B47B0"/>
+                        <path d="M9 12 Q12 14 15 12" stroke="#5B47B0" fill="none"/>
+                        <rect x="8" y="16" width="8" height="4" rx="1"/>
+                    </svg>
+                    Gen3 AI Assistant
+                </span>
+                <span style="cursor: pointer; font-size: 1.5rem;" onclick="document.getElementById('chatbot-window').style.display='none'">×</span>
             </div>
             <div class="chatbot-body">
                 <div class="chatbot-message">
@@ -1374,7 +1543,15 @@
             </div>
         </div>
         <div class="chatbot-button" onclick="document.getElementById('chatbot-window').style.display = document.getElementById('chatbot-window').style.display === 'flex' ? 'none' : 'flex'">
-            🤖
+            <svg class="svg-icon" style="width: 35px; height: 35px;" viewBox="0 0 24 24" fill="white">
+                <circle cx="12" cy="10" r="6"/>
+                <circle cx="10" cy="9" r="1.5" fill="#5B47B0"/>
+                <circle cx="14" cy="9" r="1.5" fill="#5B47B0"/>
+                <path d="M9 12 Q12 14 15 12" stroke="#5B47B0" fill="none" stroke-width="1.5"/>
+                <rect x="8" y="16" width="8" height="4" rx="1"/>
+                <rect x="10" y="20" width="1" height="2"/>
+                <rect x="13" y="20" width="1" height="2"/>
+            </svg>
         </div>
     </div>
 
