@@ -2,13 +2,13 @@
 nixPkgs = ["python3", "python3Packages.pip", "postgresql"]
 
 [phases.install]
-cmds = ["python -m venv /tmp/venv", "source /tmp/venv/bin/activate && pip install -r backend/requirements.txt"]
+cmds = ["pip install --break-system-packages -r backend/requirements.txt"]
 
 [phases.build]
 cmds = ["cd backend && python -c 'print(\"Build completed\")'"]
 
 [start]
-cmd = "/tmp/venv/bin/python backend/main.py"
+cmd = "cd backend && python main.py"
 
 [variables]
 PYTHONPATH = "/app:/app/backend"
