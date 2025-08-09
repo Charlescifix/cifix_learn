@@ -12,3 +12,4 @@ cmd = "cd backend && python main.py"
 
 [variables]
 PYTHONPATH = "/app:/app/backend"
+LD_LIBRARY_PATH = "/nix/store/*/lib"
