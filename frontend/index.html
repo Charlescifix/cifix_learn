@@ -65,7 +65,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gen3Kids - AI Coding for Young Minds</title>
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="CIFIX LEARN - Interactive AI coding programs for kids aged 6-14. Learn programming, AI, and technology through engaging projects.">
+    <meta name="keywords" content="AI coding, kids programming, STEM education, technology learning, coding for children">
+    <link rel="preconnect" href="https://kid-assessment.streamlit.app">
+    <title>CIFIX LEARN - AI Coding for Young Minds</title>
+    <script src="config.js" defer></script>
     <style>
         * {
             margin: 0;
@@ -210,19 +219,6 @@
             overflow: hidden;
         }
 
-        /* Gen3Block Background Watermark */
-        .hero::before {
-            content: 'GEN3BLOCK';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 15rem;
-            font-weight: 900;
-            color: rgba(91, 71, 176, 0.03);
-            z-index: 0;
-            white-space: nowrap;
-        }
 
         .hero-content {
             flex: 0 0 45%;
@@ -269,8 +265,8 @@
         /* Interactive Globe */
         .globe-container {
             position: relative;
-            width: 600px;
-            height: 600px;
+            width: 400px;
+            height: 400px;
             animation: float 4s ease-in-out infinite;
         }
 
@@ -427,8 +423,8 @@
         /* Orbiting Elements */
         .orbit-ring {
             position: absolute;
-            width: 700px;
-            height: 700px;
+            width: 500px;
+            height: 500px;
             border: 3px dashed rgba(91, 71, 176, 0.2);
             border-radius: 50%;
             top: 50%;
@@ -471,70 +467,13 @@
 
         @keyframes orbit-sync {
             from {
-                transform: rotate(0deg) translateX(350px) rotate(0deg);
+                transform: rotate(0deg) translateX(250px) rotate(0deg);
             }
             to {
-                transform: rotate(360deg) translateX(350px) rotate(-360deg);
+                transform: rotate(360deg) translateX(250px) rotate(-360deg);
             }
         }
 
-        /* Floating AI Notes */
-        .ai-note {
-            position: fixed;
-            background: white;
-            padding: 1rem 1.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            font-size: 0.85rem;
-            z-index: 100;
-            opacity: 0;
-            animation: slideInOut 8s infinite;
-            max-width: 280px;
-            line-height: 1.4;
-        }
-
-        .ai-note em {
-            color: var(--text-dark);
-            font-style: italic;
-        }
-
-        .ai-note small {
-            color: var(--primary-purple);
-            font-weight: 600;
-        }
-
-        @keyframes slideInOut {
-            0%, 100% { opacity: 0; transform: translateX(100px); }
-            10%, 90% { opacity: 1; transform: translateX(0); }
-        }
-
-        .note-1 {
-            top: 150px;
-            right: 50px;
-            background: linear-gradient(135deg, #FFE5E5, #FFD3E1);
-            animation-delay: 0s;
-        }
-
-        .note-2 {
-            top: 300px;
-            left: 50px;
-            background: linear-gradient(135deg, #E5F3FF, #D3E4FF);
-            animation-delay: 2s;
-        }
-
-        .note-3 {
-            bottom: 200px;
-            right: 50px;
-            background: linear-gradient(135deg, #E5FFE5, #D3FFE1);
-            animation-delay: 4s;
-        }
-
-        .note-4 {
-            bottom: 100px;
-            left: 50px;
-            background: linear-gradient(135deg, #FFF5E5, #FFE8D3);
-            animation-delay: 6s;
-        }
 
         /* Programs Section */
         .programs {
@@ -1084,23 +1023,6 @@
     </style>
 </head>
 <body>
-    <!-- Floating AI Notes -->
-    <div class="ai-note note-1">
-        <em>"AI will transform education in ways we're just beginning to imagine"</em><br>
-        <small>- Dr. Sarah Chen, MIT</small>
-    </div>
-    <div class="ai-note note-2">
-        <em>"Kids who learn AI today will lead tomorrow's world"</em><br>
-        <small>- Prof. James Liu, Stanford</small>
-    </div>
-    <div class="ai-note note-3">
-        <em>"The future belongs to those who blend creativity with technology"</em><br>
-        <small>- Maria Rodriguez, Google AI</small>
-    </div>
-    <div class="ai-note note-4">
-        <em>"Every child deserves to understand the AI shaping their future"</em><br>
-        <small>- Dr. Ahmed Hassan, OpenAI</small>
-    </div>
 
     <!-- Background Robots -->
     <div class="robot-bg robot-1"></div>
@@ -1109,7 +1031,7 @@
 
     <!-- Navigation -->
     <nav>
-        <div class="logo">Gen3Kids</div>
+        <div class="logo">CIFIX LEARN</div>
         <div class="nav-links">
             <a href="#programs">Our Programs</a>
             <a href="#features">Features</a>
@@ -1125,7 +1047,7 @@
             <h1>Where Young Minds <span class="highlight">Master AI</span> Through Code</h1>
             <p>Book your child's spot in the future! Interactive AI coding programs designed for kids aged 6-14. Choose from 6 amazing programs.</p>
             <div class="hero-buttons">
-                <a href="#programs" class="cta-button bouncy-button">Book a Program</a>
+                <a href="summer-classes.html" class="cta-button bouncy-button">Summer Classes</a>
             </div>
         </div>
         <div class="hero-visual">
@@ -1208,13 +1130,13 @@
         </div>
         <div class="powered-by-container">
             <div class="powered-by powered-1">
-                Powered by <span>Gen3Block AI Solution</span>
+                Powered by <span>Gen3block AI</span>
             </div>
             <div class="powered-by powered-2">
-                Powered by <span>Gen3Block AI Solution</span>
+                Powered by <span>Gen3block AI</span>
             </div>
             <div class="powered-by powered-3">
-                Powered by <span>Gen3Block AI Solution</span>
+                Powered by <span>Gen3block AI</span>
             </div>
         </div>
     </section>
@@ -1473,14 +1395,14 @@
     <section class="cta-section">
         <h2>Ready to Future-Proof Your Child's Education?</h2>
         <p>Limited spots available for each program. Book now to secure your child's place!</p>
-        <a href="#programs" class="cta-button bouncy-button" style="font-size: 1.2rem; padding: 1rem 3rem;">Choose a Program</a>
+        <a href="summer-classes.html" class="cta-button bouncy-button" style="font-size: 1.2rem; padding: 1rem 3rem;">Summer Classes</a>
     </section>
 
     <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
-                <h3>Gen3Kids</h3>
+                <h3>CIFIX LEARN</h3>
                 <p>Empowering the next generation of AI leaders through innovative coding education.</p>
             </div>
             <div class="footer-links">
@@ -1512,7 +1434,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Gen3Kids. All rights reserved. | Powered by Gen3Block AI Solution</p>
+            <p>&copy; 2024 CIFIX LEARN. All rights reserved. | Powered by Gen3block AI</p>
         </div>
     </footer>
 
@@ -1528,7 +1450,7 @@
                         <path d="M9 12 Q12 14 15 12" stroke="#5B47B0" fill="none"/>
                         <rect x="8" y="16" width="8" height="4" rx="1"/>
                     </svg>
-                    Gen3 AI Assistant
+                    CIFIX AI Assistant
                 </span>
                 <span style="cursor: pointer; font-size: 1.5rem;" onclick="document.getElementById('chatbot-window').style.display='none'">×</span>
             </div>

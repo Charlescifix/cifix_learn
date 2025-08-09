@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - CIFIX LEARN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #5B47B0;
+            --secondary-teal: #00D9C0;
+            --accent-pink: #FF6B9D;
+            --accent-yellow: #FFD93D;
+            --accent-orange: #FF8C42;
+            --bg-cream: #FBF9F7;
+            --text-dark: #2C2C3E;
+            --text-gray: #6B7280;
+            --white: #FFFFFF;
+            --success-green: #10B981;
+            --card-bg: rgba(255, 255, 255, 0.8);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--bg-cream) 0%, rgba(91, 71, 176, 0.05) 100%);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .user-details h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .user-details p {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        .logout-btn {
+            background: linear-gradient(135deg, var(--text-gray), var(--text-dark));
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(107, 114, 128, 0.3);
+        }
+
+        /* Main Container */
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--secondary-teal), var(--accent-yellow));
+        }
+
+        .welcome-content {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .welcome-text h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .welcome-text p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .welcome-stats {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(91, 71, 176, 0.1);
+            border-radius: 15px;
+            min-width: 100px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-purple);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-top: 0.5rem;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .action-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .action-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .action-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .action-description {
+            color: var(--text-gray);
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .course-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(251, 249, 247, 0.7);
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+
+        .course-item:hover {
+            background: rgba(0, 217, 192, 0.1);
+            transform: translateX(5px);
+        }
+
+        .course-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .course-info {
+            flex: 1;
+        }
+
+        .course-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .course-progress {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #E5E7EB;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-purple), var(--secondary-teal));
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        /* Activities Section */
+        .activities-section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .activity-time {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+        }
+
+        /* Achievements Section */
+        .achievements-section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .achievement-badge {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(251, 249, 247, 0.7);
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+
+        .achievement-badge:hover {
+            transform: scale(1.05);
+            background: rgba(0, 217, 192, 0.1);
+        }
+
+        .badge-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .badge-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                padding: 1rem;
+            }
+
+            .welcome-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .welcome-stats {
+                justify-content: center;
+            }
+
+            .welcome-text h1 {
+                font-size: 2rem;
+            }
+
+            .header {
+                padding: 1rem 3%;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .user-info {
+                order: -1;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Assessment Section */
+        .assessment-section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .assessment-section.completed {
+            border: 3px solid var(--success-green);
+        }
+
+        .assessment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .assessment-status {
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .assessment-status.completed {
+            background: linear-gradient(135deg, var(--success-green), var(--secondary-teal));
+        }
+
+        .assessment-iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .assessment-results {
+            display: none;
+            margin-top: 1.5rem;
+        }
+
+        .assessment-results.show {
+            display: block;
+        }
+
+        .result-card {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--success-green);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .result-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--success-green);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .result-description {
+            color: var(--text-dark);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .view-modules-btn {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(91, 71, 176, 0.3);
+        }
+
+        .view-modules-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(91, 71, 176, 0.4);
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-gray);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #E5E7EB;
+            border-radius: 50%;
+            border-top-color: var(--secondary-teal);
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">CIFIX LEARN</div>
+        <div class="user-info">
+            <div class="user-avatar" id="user-avatar">?</div>
+            <div class="user-details">
+                <h3 id="user-name">Loading...</h3>
+                <p id="user-email">Loading...</p>
+            </div>
+            <a href="#" class="logout-btn" onclick="logout()">Logout</a>
+        </div>
+    </header>
+
+    <!-- Loading State -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Loading your dashboard...</p>
+    </div>
+
+    <!-- Main Dashboard -->
+    <main class="dashboard" id="dashboard" style="display: none;">
+        
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <div class="welcome-content">
+                <div class="welcome-text">
+                    <h1>Welcome back, <span id="welcome-name">Student</span>!</h1>
+                    <p>Ready to continue your AI coding journey? Let's build something amazing today!</p>
+                </div>
+                <div class="welcome-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="courses-completed">3</span>
+                        <span class="stat-label">Courses</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="projects-built">7</span>
+                        <span class="stat-label">Projects</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="hours-coded">24</span>
+                        <span class="stat-label">Hours</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Assessment Section -->
+        <section class="assessment-section" id="assessment-section">
+            <div class="assessment-header">
+                <h2 class="section-title">AI Learning Pathway Assessment</h2>
+                <div class="assessment-status" id="assessment-status">Take Assessment</div>
+            </div>
+            
+            <div id="assessment-iframe-container">
+                <iframe 
+                    id="assessment-iframe" 
+                    class="assessment-iframe"
+                    src="https://kid-assessment.streamlit.app"
+                    allow="clipboard-read; clipboard-write">
+                </iframe>
+            </div>
+            
+            <div class="assessment-results" id="assessment-results">
+                <div class="result-card">
+                    <div class="result-title">
+                        <span>🎯</span>
+                        <span>Your Learning Path: <span id="recommended-path">Not Set</span></span>
+                    </div>
+                    <div class="result-description" id="path-description">
+                        Complete the assessment above to discover your personalized learning path!
+                    </div>
+                    <button class="view-modules-btn" onclick="viewLearningModules()">
+                        🚀 View Learning Modules
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="quick-actions">
+            <a href="#" class="action-card" onclick="showComingSoon('Continue Course')">
+                <span class="action-icon">📚</span>
+                <h3 class="action-title">Continue Learning</h3>
+                <p class="action-description">Pick up where you left off in your current AI fundamentals course</p>
+            </a>
+            
+            <a href="#" class="action-card" onclick="showComingSoon('Start Project')">
+                <span class="action-icon">🛠️</span>
+                <h3 class="action-title">Start New Project</h3>
+                <p class="action-description">Begin a hands-on coding project to apply what you've learned</p>
+            </a>
+            
+            <a href="#" class="action-card" onclick="showComingSoon('Join Challenge')">
+                <span class="action-icon">🏆</span>
+                <h3 class="action-title">Join Challenge</h3>
+                <p class="action-description">Participate in coding challenges with other students</p>
+            </a>
+            
+            <a href="#" class="action-card" onclick="showComingSoon('Browse Courses')">
+                <span class="action-icon">🎯</span>
+                <h3 class="action-title">Explore Courses</h3>
+                <p class="action-description">Discover new courses in AI, machine learning, and programming</p>
+            </a>
+        </section>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            
+            <!-- Progress Section -->
+            <section class="progress-section">
+                <h2 class="section-title">Your Learning Progress</h2>
+                
+                <div class="course-item">
+                    <span class="course-icon">🤖</span>
+                    <div class="course-info">
+                        <div class="course-name">AI Fundamentals for Beginners</div>
+                        <div class="course-progress">Lesson 5 of 12 completed</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 42%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <span class="course-icon">🐍</span>
+                    <div class="course-info">
+                        <div class="course-name">Python Programming Basics</div>
+                        <div class="course-progress">Lesson 8 of 10 completed</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <span class="course-icon">🧠</span>
+                    <div class="course-info">
+                        <div class="course-name">Machine Learning Concepts</div>
+                        <div class="course-progress">Lesson 2 of 15 completed</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 13%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Activities -->
+            <section class="activities-section">
+                <h2 class="section-title">Recent Activity</h2>
+                
+                <div class="activity-item">
+                    <span class="activity-icon">✅</span>
+                    <div class="activity-content">
+                        <div class="activity-title">Completed "Variables and Data Types"</div>
+                        <div class="activity-time">2 hours ago</div>
+                    </div>
+                </div>
+                
+                <div class="activity-item">
+                    <span class="activity-icon">🎯</span>
+                    <div class="activity-content">
+                        <div class="activity-title">Started "Introduction to Algorithms"</div>
+                        <div class="activity-time">Yesterday</div>
+                    </div>
+                </div>
+                
+                <div class="activity-item">
+                    <span class="activity-icon">🏆</span>
+                    <div class="activity-content">
+                        <div class="activity-title">Earned "First Steps" badge</div>
+                        <div class="activity-time">3 days ago</div>
+                    </div>
+                </div>
+                
+                <div class="activity-item">
+                    <span class="activity-icon">💬</span>
+                    <div class="activity-content">
+                        <div class="activity-title">Posted in discussion forum</div>
+                        <div class="activity-time">1 week ago</div>
+                    </div>
+                </div>
+            </section>
+            
+        </div>
+
+        <!-- Achievements Section -->
+        <section class="achievements-section">
+            <h2 class="section-title">Your Achievements</h2>
+            <div class="achievements-grid">
+                <div class="achievement-badge">
+                    <span class="badge-icon">🌟</span>
+                    <div class="badge-name">First Steps</div>
+                </div>
+                <div class="achievement-badge">
+                    <span class="badge-icon">🔥</span>
+                    <div class="badge-name">7-Day Streak</div>
+                </div>
+                <div class="achievement-badge">
+                    <span class="badge-icon">🎯</span>
+                    <div class="badge-name">Quick Learner</div>
+                </div>
+                <div class="achievement-badge">
+                    <span class="badge-icon">💡</span>
+                    <div class="badge-name">Problem Solver</div>
+                </div>
+                <div class="achievement-badge">
+                    <span class="badge-icon">🤝</span>
+                    <div class="badge-name">Team Player</div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <script>
+        // Load user data and initialize dashboard
+        window.addEventListener('load', function() {
+            // Check if user is logged in
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+            
+            if (!currentUser) {
+                alert('Please log in to access your dashboard.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Show loading state briefly for better UX
+            document.getElementById('loading').style.display = 'block';
+            
+            setTimeout(() => {
+                loadUserData(currentUser);
+                checkAssessmentStatus();
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+            }, 1500);
+        });
+
+        function loadUserData(user) {
+            // Get full registration data
+            const registrationData = JSON.parse(localStorage.getItem('completeRegistration') || '{}');
+            
+            // Update header with user info
+            const studentName = registrationData.student?.studentName || 'Student';
+            const firstName = studentName.split(' ')[0];
+            
+            document.getElementById('user-name').textContent = studentName;
+            document.getElementById('user-email').textContent = user.email;
+            document.getElementById('user-avatar').textContent = firstName.charAt(0).toUpperCase();
+            document.getElementById('welcome-name').textContent = firstName;
+
+            // Animate stats on load
+            animateStats();
+            
+            console.log('Dashboard loaded for:', studentName);
+        }
+
+        function animateStats() {
+            // Animate the statistics numbers
+            animateCounter('courses-completed', 3, 1000);
+            animateCounter('projects-built', 7, 1200);
+            animateCounter('hours-coded', 24, 1400);
+        }
+
+        function animateCounter(elementId, targetValue, duration) {
+            const element = document.getElementById(elementId);
+            const startValue = 0;
+            const increment = targetValue / (duration / 16);
+            let currentValue = startValue;
+
+            const timer = setInterval(() => {
+                currentValue += increment;
+                if (currentValue >= targetValue) {
+                    currentValue = targetValue;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(currentValue);
+            }, 16);
+        }
+
+        function showComingSoon(feature) {
+            alert(`🚧 ${feature} feature is coming soon!\n\nWe're working hard to bring you the best learning experience. This feature will be available in the next update.`);
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to log out?')) {
+                // Clear session data
+                localStorage.removeItem('currentUser');
+                localStorage.removeItem('loginRedirect');
+                
+                // Show logout message
+                alert('You have been logged out successfully. See you next time!');
+                
+                // Redirect to home page
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effects to course items
+            const courseItems = document.querySelectorAll('.course-item');
+            courseItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateX(10px)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateX(0)';
+                });
+            });
+
+            // Add click handlers for achievement badges
+            const badges = document.querySelectorAll('.achievement-badge');
+            badges.forEach(badge => {
+                badge.addEventListener('click', function() {
+                    const badgeName = this.querySelector('.badge-name').textContent;
+                    alert(`🏆 ${badgeName} Achievement!\n\nYou've unlocked this achievement through your dedication to learning. Keep up the great work!`);
+                });
+            });
+        });
+
+        // Assessment iframe communication
+        let assessmentCompleted = false;
+        
+        window.addEventListener('message', function(event) {
+            // Security check - only accept messages from the assessment app
+            if (event.origin !== 'https://kid-assessment.streamlit.app') {
+                return;
+            }
+            
+            console.log('Received message from assessment:', event.data);
+            
+            if (event.data.type === 'ASSESSMENT_COMPLETE') {
+                handleAssessmentComplete(event.data);
+            }
+        });
+        
+        function handleAssessmentComplete(data) {
+            assessmentCompleted = true;
+            
+            // Update status
+            const statusElement = document.getElementById('assessment-status');
+            statusElement.textContent = 'Assessment Completed ✅';
+            statusElement.classList.add('completed');
+            
+            // Update section styling
+            const sectionElement = document.getElementById('assessment-section');
+            sectionElement.classList.add('completed');
+            
+            // Store results in localStorage
+            const assessmentResults = {
+                recommendedPath: data.recommendedPath || 'General Programming',
+                score: data.score || 85,
+                strengths: data.strengths || ['Problem Solving', 'Logical Thinking'],
+                interests: data.interests || ['Game Development'],
+                completedAt: new Date().toISOString()
+            };
+            
+            localStorage.setItem('assessmentResults', JSON.stringify(assessmentResults));
+            
+            // Show results
+            displayAssessmentResults(assessmentResults);
+            
+            // Hide iframe after completion (optional)
+            setTimeout(() => {
+                document.getElementById('assessment-iframe-container').style.display = 'none';
+            }, 3000);
+        }
+        
+        function displayAssessmentResults(results) {
+            const resultsElement = document.getElementById('assessment-results');
+            const pathElement = document.getElementById('recommended-path');
+            const descriptionElement = document.getElementById('path-description');
+            
+            pathElement.textContent = results.recommendedPath;
+            
+            const descriptions = {
+                'Game Development': 'Perfect for creative minds who love storytelling and interactive experiences! You\'ll learn to build games, animations, and interactive applications.',
+                'AI & Machine Learning': 'Ideal for analytical thinkers fascinated by how computers can learn and make decisions. You\'ll explore data science and AI fundamentals.',
+                'Web Development': 'Great for those who enjoy creating websites and web applications that people use every day. You\'ll master HTML, CSS, JavaScript, and more.',
+                'Robotics': 'Perfect for hands-on learners who want to build and program physical robots and automated systems.',
+                'Mobile App Development': 'Ideal for those who want to create apps for smartphones and tablets that millions of people can use.',
+                'Data Science': 'Great for students who love working with numbers, patterns, and discovering insights from data.',
+                'General Programming': 'A well-rounded path covering multiple programming concepts and languages to build a strong foundation.'
+            };
+            
+            descriptionElement.textContent = descriptions[results.recommendedPath] || descriptions['General Programming'];
+            
+            resultsElement.classList.add('show');
+            
+            // Animate the results appearance
+            setTimeout(() => {
+                resultsElement.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    resultsElement.style.transform = 'translateY(0)';
+                }, 200);
+            }, 100);
+        }
+        
+        function viewLearningModules() {
+            const results = JSON.parse(localStorage.getItem('assessmentResults') || '{}');
+            
+            if (!results.recommendedPath) {
+                alert('Please complete the assessment first to view your personalized learning modules!');
+                return;
+            }
+            
+            // Store the path for the learning modules page
+            localStorage.setItem('selectedLearningPath', results.recommendedPath);
+            
+            // Redirect to learning modules page
+            window.location.href = 'learning-modules.html';
+        }
+        
+        // Check if assessment was already completed
+        function checkAssessmentStatus() {
+            const results = JSON.parse(localStorage.getItem('assessmentResults') || 'null');
+            
+            if (results && results.completedAt) {
+                assessmentCompleted = true;
+                
+                // Update UI to show completed state
+                const statusElement = document.getElementById('assessment-status');
+                statusElement.textContent = 'Assessment Completed ✅';
+                statusElement.classList.add('completed');
+                
+                const sectionElement = document.getElementById('assessment-section');
+                sectionElement.classList.add('completed');
+                
+                // Show results immediately
+                displayAssessmentResults(results);
+                
+                // Optionally hide iframe if already completed
+                document.getElementById('assessment-iframe-container').style.display = 'none';
+            }
+        }
+        
+        // Auto-refresh dashboard data (in a real app, this would fetch from API)
+        setInterval(() => {
+            // In a real application, this would refresh data from the server
+            console.log('Dashboard data refresh (demo mode)');
+        }, 300000); // Refresh every 5 minutes
+        
+        // Welcome animation
+        setTimeout(() => {
+            const welcomeSection = document.querySelector('.welcome-section');
+            if (welcomeSection) {
+                welcomeSection.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    welcomeSection.style.transform = 'translateY(0)';
+                }, 200);
+            }
+        }, 2000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "python backend/main.py"
+healthcheckPath = "/health"
+healthcheckTimeout = 60
+restartPolicyType = "on_failure"
+
+[environments.production]
+[environments.production.variables]
+APP_ENV = "production"
+APP_DEBUG = "false"
+PYTHONPATH = "/app:/app/backend"
+
+[environments.staging]
+[environments.staging.variables]
+APP_ENV = "staging"
+APP_DEBUG = "true"
+PYTHONPATH = "/app:/app/backend"

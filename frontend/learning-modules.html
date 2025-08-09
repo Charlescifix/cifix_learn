@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Modules - CIFIX LEARN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #5B47B0;
+            --secondary-teal: #00D9C0;
+            --accent-pink: #FF6B9D;
+            --accent-yellow: #FFD93D;
+            --accent-orange: #FF8C42;
+            --bg-cream: #FBF9F7;
+            --text-dark: #2C2C3E;
+            --text-gray: #6B7280;
+            --white: #FFFFFF;
+            --success-green: #10B981;
+            --card-bg: rgba(255, 255, 255, 0.8);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--bg-cream) 0%, rgba(91, 71, 176, 0.05) 100%);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            background: rgba(91, 71, 176, 0.1);
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, var(--text-gray), var(--text-dark));
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(107, 114, 128, 0.3);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Path Header */
+        .path-header {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .path-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--secondary-teal), var(--accent-yellow));
+        }
+
+        .path-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .path-icon {
+            font-size: 3rem;
+        }
+
+        .path-description {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .path-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(91, 71, 176, 0.1);
+            border-radius: 15px;
+        }
+
+        .stat-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Modules Grid */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .module-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .module-header {
+            padding: 2rem 2rem 1rem;
+            position: relative;
+        }
+
+        .module-level {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .module-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .module-icon {
+            font-size: 2rem;
+        }
+
+        .module-description {
+            color: var(--text-gray);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .module-content {
+            padding: 0 2rem 2rem;
+        }
+
+        .module-topics {
+            margin-bottom: 1.5rem;
+        }
+
+        .topics-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .topics-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .topic-tag {
+            background: rgba(0, 217, 192, 0.1);
+            color: var(--secondary-teal);
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .module-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .module-duration {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(91, 71, 176, 0.3);
+        }
+
+        .start-btn:disabled {
+            background: var(--text-gray);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #E5E7EB;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-purple), var(--secondary-teal));
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .path-title {
+                font-size: 2rem;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .path-stats {
+                justify-content: center;
+            }
+
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 1rem 3%;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                order: -1;
+            }
+        }
+
+        /* Loading state */
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            color: var(--text-gray);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #E5E7EB;
+            border-radius: 50%;
+            border-top-color: var(--secondary-teal);
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">CIFIX LEARN</div>
+        <nav class="nav-links">
+            <a href="student-dashboard.html" class="nav-link">Dashboard</a>
+            <a href="student-dashboard.html" class="back-btn">← Back to Dashboard</a>
+        </nav>
+    </header>
+
+    <!-- Loading State -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Loading your personalized learning modules...</p>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container" id="main-content" style="display: none;">
+        
+        <!-- Path Header -->
+        <section class="path-header">
+            <h1 class="path-title">
+                <span class="path-icon" id="path-icon">🎮</span>
+                <span id="path-name">Game Development</span>
+            </h1>
+            <p class="path-description" id="path-description">
+                Learn to create engaging games and interactive experiences using modern programming languages and game engines.
+            </p>
+            <div class="path-stats">
+                <div class="stat-item">
+                    <span class="stat-icon">📚</span>
+                    <span id="total-modules">6 Modules</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">⏱️</span>
+                    <span id="total-duration">24 Hours</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">🏆</span>
+                    <span>Certificate Included</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Overview -->
+        <section class="progress-section">
+            <h2 class="section-title">Your Progress</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" id="overall-progress" style="width: 0%;"></div>
+            </div>
+            <div class="progress-text">
+                <span>Overall Progress</span>
+                <span id="progress-percentage">0% Complete</span>
+            </div>
+        </section>
+
+        <!-- Learning Modules -->
+        <section class="modules-grid" id="modules-container">
+            <!-- Modules will be dynamically loaded here -->
+        </section>
+        
+    </main>
+
+    <script>
+        // Learning paths configuration
+        const learningPaths = {
+            'Game Development': {
+                icon: '🎮',
+                description: 'Learn to create engaging games and interactive experiences using modern programming languages and game engines.',
+                modules: [
+                    {
+                        id: 1,
+                        title: 'Programming Fundamentals',
+                        icon: '💻',
+                        level: 'Beginner',
+                        description: 'Learn the basics of programming with Python - variables, loops, functions, and basic algorithms.',
+                        topics: ['Variables', 'Functions', 'Loops', 'Conditionals', 'Data Types'],
+                        duration: '4 hours',
+                        locked: false
+                    },
+                    {
+                        id: 2,
+                        title: 'Game Logic & Algorithms',
+                        icon: '🧩',
+                        level: 'Beginner',
+                        description: 'Understanding game mechanics, player input, collision detection, and basic AI behaviors.',
+                        topics: ['Game Loops', 'Input Handling', 'Collision Detection', 'Basic AI', 'State Management'],
+                        duration: '5 hours',
+                        locked: false
+                    },
+                    {
+                        id: 3,
+                        title: 'Graphics & Animation',
+                        icon: '🎨',
+                        level: 'Intermediate',
+                        description: 'Create visual elements, sprites, animations, and learn about 2D graphics programming.',
+                        topics: ['Sprites', '2D Graphics', 'Animation', 'Visual Effects', 'UI Design'],
+                        duration: '6 hours',
+                        locked: true
+                    },
+                    {
+                        id: 4,
+                        title: 'Game Engines (Scratch/GameMaker)',
+                        icon: '🔧',
+                        level: 'Intermediate',
+                        description: 'Hands-on experience with beginner-friendly game development tools and engines.',
+                        topics: ['Scratch Programming', 'GameMaker Basics', 'Asset Management', 'Scene Design'],
+                        duration: '4 hours',
+                        locked: true
+                    },
+                    {
+                        id: 5,
+                        title: 'Sound & Music Integration',
+                        icon: '🎵',
+                        level: 'Intermediate',
+                        description: 'Add audio effects, background music, and create immersive soundscapes for your games.',
+                        topics: ['Sound Effects', 'Background Music', 'Audio Programming', 'Sound Design'],
+                        duration: '3 hours',
+                        locked: true
+                    },
+                    {
+                        id: 6,
+                        title: 'Complete Game Project',
+                        icon: '🚀',
+                        level: 'Advanced',
+                        description: 'Build a complete game from concept to finished product, including testing and polishing.',
+                        topics: ['Game Design', 'Project Management', 'Testing', 'Publishing', 'Portfolio'],
+                        duration: '8 hours',
+                        locked: true
+                    }
+                ]
+            },
+            'AI & Machine Learning': {
+                icon: '🤖',
+                description: 'Discover the fascinating world of artificial intelligence and machine learning through hands-on projects.',
+                modules: [
+                    {
+                        id: 1,
+                        title: 'Introduction to AI',
+                        icon: '🧠',
+                        level: 'Beginner',
+                        description: 'Understanding what AI is, how it works, and exploring real-world applications.',
+                        topics: ['What is AI?', 'Types of AI', 'AI in Daily Life', 'Ethics in AI', 'Future of AI'],
+                        duration: '3 hours',
+                        locked: false
+                    },
+                    {
+                        id: 2,
+                        title: 'Data and Patterns',
+                        icon: '📊',
+                        level: 'Beginner',
+                        description: 'Learn how computers recognize patterns in data and make predictions.',
+                        topics: ['Data Collection', 'Pattern Recognition', 'Data Visualization', 'Statistics Basics'],
+                        duration: '4 hours',
+                        locked: false
+                    },
+                    {
+                        id: 3,
+                        title: 'Machine Learning Basics',
+                        icon: '⚙️',
+                        level: 'Intermediate',
+                        description: 'Build your first machine learning models using kid-friendly tools and platforms.',
+                        topics: ['Supervised Learning', 'Training Models', 'Making Predictions', 'Model Evaluation'],
+                        duration: '5 hours',
+                        locked: true
+                    },
+                    {
+                        id: 4,
+                        title: 'Computer Vision',
+                        icon: '👁️',
+                        level: 'Intermediate',
+                        description: 'Teach computers to "see" and recognize images, faces, and objects.',
+                        topics: ['Image Recognition', 'Object Detection', 'Face Recognition', 'Visual AI'],
+                        duration: '4 hours',
+                        locked: true
+                    },
+                    {
+                        id: 5,
+                        title: 'Natural Language Processing',
+                        icon: '💬',
+                        level: 'Intermediate',
+                        description: 'Help computers understand and generate human language - build chatbots and language tools.',
+                        topics: ['Text Analysis', 'Chatbots', 'Language Translation', 'Sentiment Analysis'],
+                        duration: '4 hours',
+                        locked: true
+                    },
+                    {
+                        id: 6,
+                        title: 'AI Project Showcase',
+                        icon: '🎯',
+                        level: 'Advanced',
+                        description: 'Create your own AI application and present it to showcase your skills.',
+                        topics: ['Project Planning', 'AI Implementation', 'Testing & Debugging', 'Presentation Skills'],
+                        duration: '6 hours',
+                        locked: true
+                    }
+                ]
+            },
+            'Web Development': {
+                icon: '🌐',
+                description: 'Create amazing websites and web applications that millions of people can use and enjoy.',
+                modules: [
+                    {
+                        id: 1,
+                        title: 'HTML Fundamentals',
+                        icon: '📄',
+                        level: 'Beginner',
+                        description: 'Learn the building blocks of websites - create your first web pages with HTML.',
+                        topics: ['HTML Structure', 'Tags & Elements', 'Links & Images', 'Forms', 'Semantic HTML'],
+                        duration: '4 hours',
+                        locked: false
+                    },
+                    {
+                        id: 2,
+                        title: 'CSS Styling',
+                        icon: '🎨',
+                        level: 'Beginner',
+                        description: 'Make your websites beautiful with colors, fonts, layouts, and animations.',
+                        topics: ['CSS Selectors', 'Colors & Fonts', 'Layout', 'Flexbox', 'Animations'],
+                        duration: '5 hours',
+                        locked: false
+                    },
+                    {
+                        id: 3,
+                        title: 'JavaScript Interactivity',
+                        icon: '⚡',
+                        level: 'Intermediate',
+                        description: 'Add interactive features, buttons, forms, and dynamic content to your websites.',
+                        topics: ['Variables & Functions', 'DOM Manipulation', 'Event Handling', 'Interactive Features'],
+                        duration: '6 hours',
+                        locked: true
+                    },
+                    {
+                        id: 4,
+                        title: 'Responsive Design',
+                        icon: '📱',
+                        level: 'Intermediate',
+                        description: 'Make websites that look great on phones, tablets, and computers.',
+                        topics: ['Mobile-First Design', 'Media Queries', 'Grid Systems', 'Touch Interfaces'],
+                        duration: '4 hours',
+                        locked: true
+                    },
+                    {
+                        id: 5,
+                        title: 'Web APIs & Data',
+                        icon: '🔌',
+                        level: 'Intermediate',
+                        description: 'Connect your websites to external data sources and services.',
+                        topics: ['API Basics', 'Fetching Data', 'JSON', 'Local Storage', 'Third-party Services'],
+                        duration: '5 hours',
+                        locked: true
+                    },
+                    {
+                        id: 6,
+                        title: 'Final Web Project',
+                        icon: '🚀',
+                        level: 'Advanced',
+                        description: 'Build a complete website or web application from start to finish.',
+                        topics: ['Project Planning', 'Full Development', 'Testing', 'Deployment', 'Portfolio'],
+                        duration: '8 hours',
+                        locked: true
+                    }
+                ]
+            },
+            'Robotics': {
+                icon: '🤖',
+                description: 'Build and program robots that can move, sense their environment, and perform tasks autonomously.',
+                modules: [
+                    {
+                        id: 1,
+                        title: 'Introduction to Robotics',
+                        icon: '🔧',
+                        level: 'Beginner',
+                        description: 'Learn what robots are, how they work, and explore different types of robots.',
+                        topics: ['Robot Components', 'Sensors & Actuators', 'Types of Robots', 'Robot Applications'],
+                        duration: '3 hours',
+                        locked: false
+                    },
+                    {
+                        id: 2,
+                        title: 'Programming Robots',
+                        icon: '💻',
+                        level: 'Beginner',
+                        description: 'Learn to write code that controls robot movements and behaviors.',
+                        topics: ['Block Programming', 'Movement Commands', 'Loops & Conditions', 'Basic Logic'],
+                        duration: '4 hours',
+                        locked: false
+                    },
+                    {
+                        id: 3,
+                        title: 'Sensors & Environment',
+                        icon: '👁️',
+                        level: 'Intermediate',
+                        description: 'Teach robots to see, hear, and respond to their environment using sensors.',
+                        topics: ['Ultrasonic Sensors', 'Light Sensors', 'Touch Sensors', 'Gyroscopes', 'Camera Input'],
+                        duration: '5 hours',
+                        locked: true
+                    },
+                    {
+                        id: 4,
+                        title: 'Autonomous Navigation',
+                        icon: '🗺️',
+                        level: 'Intermediate',
+                        description: 'Program robots to navigate spaces, avoid obstacles, and find their way.',
+                        topics: ['Path Planning', 'Obstacle Avoidance', 'Mapping', 'GPS Navigation'],
+                        duration: '6 hours',
+                        locked: true
+                    },
+                    {
+                        id: 5,
+                        title: 'Robot Communication',
+                        icon: '📡',
+                        level: 'Intermediate',
+                        description: 'Enable robots to communicate with each other and with humans.',
+                        topics: ['Wireless Communication', 'Bluetooth', 'Voice Commands', 'Remote Control'],
+                        duration: '4 hours',
+                        locked: true
+                    },
+                    {
+                        id: 6,
+                        title: 'Robot Challenge Project',
+                        icon: '🏆',
+                        level: 'Advanced',
+                        description: 'Design and build a robot to solve a specific challenge or compete in a robotics competition.',
+                        topics: ['Challenge Analysis', 'Robot Design', 'Programming Solutions', 'Testing & Iteration'],
+                        duration: '8 hours',
+                        locked: true
+                    }
+                ]
+            },
+            'Data Science': {
+                icon: '📊',
+                description: 'Learn to collect, analyze, and visualize data to discover patterns and make informed decisions.',
+                modules: [
+                    {
+                        id: 1,
+                        title: 'Introduction to Data',
+                        icon: '📈',
+                        level: 'Beginner',
+                        description: 'Understand what data is, where it comes from, and why it\'s important in our digital world.',
+                        topics: ['Types of Data', 'Data Sources', 'Data Quality', 'Data Ethics', 'Privacy'],
+                        duration: '3 hours',
+                        locked: false
+                    },
+                    {
+                        id: 2,
+                        title: 'Data Collection & Organization',
+                        icon: '🗃️',
+                        level: 'Beginner',
+                        description: 'Learn to gather, clean, and organize data for analysis using spreadsheets and simple tools.',
+                        topics: ['Data Collection Methods', 'Spreadsheets', 'Data Cleaning', 'Organization'],
+                        duration: '4 hours',
+                        locked: false
+                    },
+                    {
+                        id: 3,
+                        title: 'Data Visualization',
+                        icon: '📊',
+                        level: 'Intermediate',
+                        description: 'Create charts, graphs, and visual representations to tell stories with data.',
+                        topics: ['Chart Types', 'Graph Creation', 'Data Storytelling', 'Visualization Tools'],
+                        duration: '5 hours',
+                        locked: true
+                    },
+                    {
+                        id: 4,
+                        title: 'Statistics & Analysis',
+                        icon: '🔢',
+                        level: 'Intermediate',
+                        description: 'Learn basic statistical concepts to analyze data and find meaningful patterns.',
+                        topics: ['Averages & Medians', 'Trends', 'Correlations', 'Basic Statistics'],
+                        duration: '6 hours',
+                        locked: true
+                    },
+                    {
+                        id: 5,
+                        title: 'Predictive Analytics',
+                        icon: '🔮',
+                        level: 'Intermediate',
+                        description: 'Use data to make predictions about future trends and outcomes.',
+                        topics: ['Trend Analysis', 'Forecasting', 'Prediction Models', 'Accuracy Testing'],
+                        duration: '5 hours',
+                        locked: true
+                    },
+                    {
+                        id: 6,
+                        title: 'Data Science Project',
+                        icon: '🎯',
+                        level: 'Advanced',
+                        description: 'Complete a full data science project from data collection to insights presentation.',
+                        topics: ['Project Planning', 'Data Pipeline', 'Analysis & Insights', 'Presentation'],
+                        duration: '7 hours',
+                        locked: true
+                    }
+                ]
+            },
+            'Mobile App Development': {
+                icon: '📱',
+                description: 'Create mobile applications for smartphones and tablets that people use every day.',
+                modules: [
+                    {
+                        id: 1,
+                        title: 'Mobile App Basics',
+                        icon: '📱',
+                        level: 'Beginner',
+                        description: 'Learn about mobile platforms, app types, and what makes a great mobile app.',
+                        topics: ['iOS vs Android', 'Native vs Hybrid Apps', 'App Design Principles', 'User Experience'],
+                        duration: '3 hours',
+                        locked: false
+                    },
+                    {
+                        id: 2,
+                        title: 'App Design & Prototyping',
+                        icon: '🎨',
+                        level: 'Beginner',
+                        description: 'Design user interfaces and create interactive prototypes for mobile apps.',
+                        topics: ['UI/UX Design', 'Wireframing', 'Prototyping Tools', 'Design Systems'],
+                        duration: '4 hours',
+                        locked: false
+                    },
+                    {
+                        id: 3,
+                        title: 'Programming for Mobile',
+                        icon: '💻',
+                        level: 'Intermediate',
+                        description: 'Learn programming languages and frameworks used in mobile app development.',
+                        topics: ['App Development Platforms', 'Programming Logic', 'App Structure', 'Basic Coding'],
+                        duration: '6 hours',
+                        locked: true
+                    },
+                    {
+                        id: 4,
+                        title: 'Interactive Features',
+                        icon: '⚡',
+                        level: 'Intermediate',
+                        description: 'Add touch interactions, animations, and dynamic content to your apps.',
+                        topics: ['Touch Gestures', 'Animations', 'User Input', 'Interactive Elements'],
+                        duration: '5 hours',
+                        locked: true
+                    },
+                    {
+                        id: 5,
+                        title: 'Data & Storage',
+                        icon: '💾',
+                        level: 'Intermediate',
+                        description: 'Learn to save user data, connect to internet services, and manage app content.',
+                        topics: ['Local Storage', 'Cloud Services', 'APIs', 'Data Management'],
+                        duration: '4 hours',
+                        locked: true
+                    },
+                    {
+                        id: 6,
+                        title: 'Complete Mobile App',
+                        icon: '🚀',
+                        level: 'Advanced',
+                        description: 'Build, test, and publish your own mobile app to app stores.',
+                        topics: ['Full App Development', 'Testing', 'Publishing', 'App Store Guidelines'],
+                        duration: '8 hours',
+                        locked: true
+                    }
+                ]
+            },
+            'General Programming': {
+                icon: '💻',
+                description: 'Build a strong foundation in programming concepts and multiple languages to become a versatile developer.',
+                modules: [
+                    {
+                        id: 1,
+                        title: 'Programming Fundamentals',
+                        icon: '🔤',
+                        level: 'Beginner',
+                        description: 'Learn core programming concepts that apply to all programming languages.',
+                        topics: ['Variables', 'Data Types', 'Operators', 'Input/Output', 'Comments'],
+                        duration: '4 hours',
+                        locked: false
+                    },
+                    {
+                        id: 2,
+                        title: 'Logic & Problem Solving',
+                        icon: '🧩',
+                        level: 'Beginner',
+                        description: 'Develop logical thinking and problem-solving skills essential for programming.',
+                        topics: ['Algorithms', 'Flowcharts', 'Pseudocode', 'Debugging', 'Problem Decomposition'],
+                        duration: '4 hours',
+                        locked: false
+                    },
+                    {
+                        id: 3,
+                        title: 'Control Structures',
+                        icon: '🔄',
+                        level: 'Intermediate',
+                        description: 'Master loops, conditionals, and control flow to create dynamic programs.',
+                        topics: ['If/Else Statements', 'Loops', 'Switch Cases', 'Boolean Logic', 'Nested Structures'],
+                        duration: '5 hours',
+                        locked: true
+                    },
+                    {
+                        id: 4,
+                        title: 'Functions & Modules',
+                        icon: '📦',
+                        level: 'Intermediate',
+                        description: 'Learn to write reusable code with functions and organize code into modules.',
+                        topics: ['Function Definition', 'Parameters', 'Return Values', 'Scope', 'Modules'],
+                        duration: '5 hours',
+                        locked: true
+                    },
+                    {
+                        id: 5,
+                        title: 'Data Structures',
+                        icon: '🗃️',
+                        level: 'Intermediate',
+                        description: 'Work with arrays, lists, objects, and other data structures to manage information.',
+                        topics: ['Arrays/Lists', 'Objects/Dictionaries', 'Strings', 'Data Manipulation'],
+                        duration: '6 hours',
+                        locked: true
+                    },
+                    {
+                        id: 6,
+                        title: 'Programming Project',
+                        icon: '🎯',
+                        level: 'Advanced',
+                        description: 'Apply all your programming skills to create a comprehensive software project.',
+                        topics: ['Project Planning', 'Code Organization', 'Testing', 'Documentation', 'Version Control'],
+                        duration: '8 hours',
+                        locked: true
+                    }
+                ]
+            }
+        };
+
+        let currentPath = null;
+        let completedModules = [];
+
+        // Initialize page
+        window.addEventListener('load', function() {
+            // Show loading state
+            document.getElementById('loading').style.display = 'block';
+            
+            // Get selected learning path
+            const pathName = localStorage.getItem('selectedLearningPath') || 'General Programming';
+            const assessmentResults = JSON.parse(localStorage.getItem('assessmentResults') || '{}');
+            
+            // Load path data
+            setTimeout(() => {
+                loadLearningPath(pathName);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            }, 1500);
+        });
+
+        function loadLearningPath(pathName) {
+            currentPath = learningPaths[pathName];
+            if (!currentPath) {
+                currentPath = learningPaths['General Programming'];
+                pathName = 'General Programming';
+            }
+
+            // Load completed modules from localStorage
+            completedModules = JSON.parse(localStorage.getItem(`completed_${pathName}`) || '[]');
+
+            // Update path header
+            document.getElementById('path-name').textContent = pathName;
+            document.getElementById('path-icon').textContent = currentPath.icon;
+            document.getElementById('path-description').textContent = currentPath.description;
+            document.getElementById('total-modules').textContent = `${currentPath.modules.length} Modules`;
+            
+            const totalHours = currentPath.modules.reduce((sum, module) => {
+                return sum + parseInt(module.duration);
+            }, 0);
+            document.getElementById('total-duration').textContent = `${totalHours} Hours`;
+
+            // Update progress
+            updateProgress();
+
+            // Render modules
+            renderModules();
+        }
+
+        function updateProgress() {
+            const progressPercentage = Math.round((completedModules.length / currentPath.modules.length) * 100);
+            document.getElementById('overall-progress').style.width = `${progressPercentage}%`;
+            document.getElementById('progress-percentage').textContent = `${progressPercentage}% Complete`;
+        }
+
+        function renderModules() {
+            const container = document.getElementById('modules-container');
+            container.innerHTML = '';
+
+            currentPath.modules.forEach((module, index) => {
+                const isCompleted = completedModules.includes(module.id);
+                const isLocked = module.locked && !isCompleted && (index === 0 || !completedModules.includes(currentPath.modules[index - 1].id));
+                
+                const moduleCard = document.createElement('div');
+                moduleCard.className = 'module-card';
+                
+                moduleCard.innerHTML = `
+                    <div class="module-header">
+                        <div class="module-level">${module.level}</div>
+                        <h3 class="module-title">
+                            <span class="module-icon">${module.icon}</span>
+                            ${module.title}
+                        </h3>
+                        <p class="module-description">${module.description}</p>
+                    </div>
+                    <div class="module-content">
+                        <div class="module-topics">
+                            <div class="topics-title">What you'll learn:</div>
+                            <div class="topics-list">
+                                ${module.topics.map(topic => `<span class="topic-tag">${topic}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="module-footer">
+                            <div class="module-duration">
+                                <span>⏱️</span>
+                                <span>${module.duration}</span>
+                            </div>
+                            <button class="start-btn" ${isLocked ? 'disabled' : ''} onclick="startModule(${module.id})">
+                                ${isCompleted ? '✅ Completed' : isLocked ? '🔒 Locked' : '▶️ Start Module'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                if (isCompleted) {
+                    moduleCard.style.background = 'rgba(16, 185, 129, 0.05)';
+                    moduleCard.style.border = '2px solid rgba(16, 185, 129, 0.2)';
+                }
+
+                container.appendChild(moduleCard);
+            });
+        }
+
+        function startModule(moduleId) {
+            const module = currentPath.modules.find(m => m.id === moduleId);
+            if (!module) return;
+
+            // In a real application, this would navigate to the module content
+            const confirmed = confirm(`🚀 Ready to start "${module.title}"?\n\nThis module will take approximately ${module.duration} to complete.\n\nClick OK to begin your learning journey!`);
+            
+            if (confirmed) {
+                // Simulate module completion for demo
+                setTimeout(() => {
+                    completeModule(moduleId);
+                    alert(`🎉 Congratulations!\n\nYou've completed "${module.title}"!\n\nYour progress has been saved. Keep up the great work!`);
+                }, 2000);
+            }
+        }
+
+        function completeModule(moduleId) {
+            if (!completedModules.includes(moduleId)) {
+                completedModules.push(moduleId);
+                
+                // Save progress
+                const pathName = localStorage.getItem('selectedLearningPath') || 'General Programming';
+                localStorage.setItem(`completed_${pathName}`, JSON.stringify(completedModules));
+                
+                // Update UI
+                updateProgress();
+                renderModules();
+                
+                // Check if path is completed
+                if (completedModules.length === currentPath.modules.length) {
+                    setTimeout(() => {
+                        alert(`🏆 AMAZING ACHIEVEMENT! 🏆\n\nYou've completed the entire ${pathName} learning path!\n\nYou're now ready to build incredible projects and continue your coding journey. Keep exploring and learning!`);
+                    }, 1000);
+                }
+            }
+        }
+
+        // Add some animation when modules load
+        setTimeout(() => {
+            const moduleCards = document.querySelectorAll('.module-card');
+            moduleCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'all 0.5s ease';
+                    
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 100);
+            });
+        }, 100);
+    </script>
+</body>
+</html>

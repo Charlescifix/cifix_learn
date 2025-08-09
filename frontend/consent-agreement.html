@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consent & Agreement - CIFIX LEARN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #5B47B0;
+            --secondary-teal: #00D9C0;
+            --accent-pink: #FF6B9D;
+            --accent-yellow: #FFD93D;
+            --accent-orange: #FF8C42;
+            --bg-cream: #FBF9F7;
+            --text-dark: #2C2C3E;
+            --text-gray: #6B7280;
+            --white: #FFFFFF;
+            --success-green: #10B981;
+            --error-red: #EF4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--bg-cream) 0%, rgba(91, 71, 176, 0.05) 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(91, 71, 176, 0.3);
+            font-size: 0.9rem;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(91, 71, 176, 0.4);
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, var(--text-gray), var(--text-dark));
+            box-shadow: 0 5px 15px rgba(107, 114, 128, 0.3);
+        }
+
+        .back-button:hover {
+            box-shadow: 0 8px 25px rgba(107, 114, 128, 0.4);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1000px;
+            margin: 120px auto 0;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Consent Container */
+        .consent-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .consent-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--secondary-teal), var(--accent-yellow));
+        }
+
+        .consent-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .consent-subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Consent Sections */
+        .consent-sections {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .consent-section {
+            background: rgba(251, 249, 247, 0.5);
+            border: 2px solid #E5E7EB;
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .consent-section:hover {
+            border-color: var(--secondary-teal);
+            background: rgba(0, 217, 192, 0.05);
+        }
+
+        .consent-section.checked {
+            border-color: var(--secondary-teal);
+            background: rgba(0, 217, 192, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            width: 50px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .section-content {
+            margin-left: 66px;
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-details {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--secondary-teal);
+        }
+
+        .section-details h4 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .section-details ul {
+            margin-left: 1.5rem;
+            color: var(--text-gray);
+        }
+
+        .section-details li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Consent Checkbox */
+        .consent-checkbox {
+            display: flex;
+            align-items: center;
+            margin-left: 66px;
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+
+        .consent-checkbox:hover {
+            background: rgba(0, 217, 192, 0.1);
+        }
+
+        .consent-checkbox input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            margin-right: 1rem;
+            cursor: pointer;
+            accent-color: var(--secondary-teal);
+        }
+
+        .checkbox-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .required-badge {
+            background: var(--accent-pink);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 1rem;
+        }
+
+        /* Progress Indicator */
+        .progress-indicator {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .progress-text {
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+
+        .consent-progress {
+            background: #E5E7EB;
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .consent-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-purple), var(--secondary-teal));
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        /* Submit Button */
+        .submit-button {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            color: white;
+            padding: 1.2rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(91, 71, 176, 0.3);
+            margin-top: 2rem;
+        }
+
+        .submit-button:hover:not(:disabled) {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(91, 71, 176, 0.4);
+        }
+
+        .submit-button:disabled {
+            background: var(--text-gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Error Message */
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid var(--error-red);
+            color: var(--error-red);
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            display: none;
+            text-align: center;
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .float-1 {
+            top: 15%;
+            left: 8%;
+            font-size: 2.5rem;
+            color: var(--accent-pink);
+            animation-delay: 0s;
+        }
+
+        .float-2 {
+            top: 50%;
+            right: 5%;
+            font-size: 2rem;
+            color: var(--secondary-teal);
+            animation-delay: 3s;
+        }
+
+        .float-3 {
+            bottom: 25%;
+            left: 10%;
+            font-size: 1.8rem;
+            color: var(--accent-yellow);
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(15deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+                margin-top: 100px;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .consent-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .consent-title {
+                font-size: 1.8rem;
+            }
+
+            .section-content,
+            .consent-checkbox {
+                margin-left: 0;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .section-icon {
+                margin-bottom: 0.5rem;
+            }
+
+            .floating-element {
+                display: none;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .nav-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Elements -->
+    <div class="floating-element float-1">📋</div>
+    <div class="floating-element float-2">✅</div>
+    <div class="floating-element float-3">🔒</div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">CIFIX LEARN</div>
+        <div class="nav-buttons">
+            <a href="email-verification.html" class="nav-button back-button">← Back</a>
+            <a href="index.html" class="nav-button">Home</a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Consent & Agreement</h1>
+            <p>Please review and agree to all the following terms and conditions to complete your registration and access CIFIX LEARN's AI coding platform.</p>
+        </div>
+
+        <!-- Consent Form -->
+        <div class="consent-container">
+            <h2 class="consent-title">Terms & Consent Agreement</h2>
+            <p class="consent-subtitle">All consent items below are required to proceed with your student's enrollment in our AI coding program.</p>
+            
+            <!-- Progress Indicator -->
+            <div class="progress-indicator">
+                <div class="progress-text">Consent Progress: <span id="progress-count">0 of 4</span> completed</div>
+                <div class="consent-progress">
+                    <div class="consent-progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+
+            <form id="consent-form">
+                <div class="consent-sections">
+                    
+                    <!-- Data Storage & Privacy -->
+                    <div class="consent-section" id="section-data">
+                        <div class="section-header">
+                            <div class="section-icon">🔐</div>
+                            <div class="section-title">Data Storage & Privacy Rights</div>
+                        </div>
+                        <div class="section-content">
+                            We take your privacy seriously and want to be transparent about how we collect, use, and protect your student's information.
+                        </div>
+                        <div class="section-details">
+                            <h4>We will collect and store:</h4>
+                            <ul>
+                                <li>Student profile information (name, age, grade level)</li>
+                                <li>Learning progress and coding projects</li>
+                                <li>Platform usage analytics for educational improvement</li>
+                                <li>Parent/guardian contact information</li>
+                            </ul>
+                            <h4>Your rights include:</h4>
+                            <ul>
+                                <li>Request access to your student's data at any time</li>
+                                <li>Request deletion of account and associated data</li>
+                                <li>Opt-out of non-essential data collection</li>
+                                <li>Data portability and export options</li>
+                            </ul>
+                        </div>
+                        <label class="consent-checkbox">
+                            <input type="checkbox" id="consent-data" name="consent-data" required>
+                            <span class="checkbox-label">I consent to CIFIX LEARN collecting, storing, and processing my student's data as outlined above</span>
+                            <span class="required-badge">Required</span>
+                        </label>
+                    </div>
+
+                    <!-- Content Usage & Marketing -->
+                    <div class="consent-section" id="section-marketing">
+                        <div class="section-header">
+                            <div class="section-icon">📢</div>
+                            <div class="section-title">Content Usage & Marketing</div>
+                        </div>
+                        <div class="section-content">
+                            Help us improve our platform and share success stories to inspire other young coders.
+                        </div>
+                        <div class="section-details">
+                            <h4>Content usage includes:</h4>
+                            <ul>
+                                <li>Student coding projects for educational showcases (anonymized)</li>
+                                <li>Progress stories for platform improvement testimonials</li>
+                                <li>Educational content created during lessons</li>
+                            </ul>
+                            <h4>Marketing communications:</h4>
+                            <ul>
+                                <li>Updates about new courses and features</li>
+                                <li>Educational newsletters and coding tips</li>
+                                <li>Special offers and program announcements</li>
+                                <li>Community highlights and achievements</li>
+                            </ul>
+                        </div>
+                        <label class="consent-checkbox">
+                            <input type="checkbox" id="consent-marketing" name="consent-marketing" required>
+                            <span class="checkbox-label">I consent to CIFIX LEARN using student content for platform improvement and sending educational marketing communications</span>
+                            <span class="required-badge">Required</span>
+                        </label>
+                    </div>
+
+                    <!-- Parent/Guardian Consent -->
+                    <div class="consent-section" id="section-parent">
+                        <div class="section-header">
+                            <div class="section-icon">👨‍👩‍👧‍👦</div>
+                            <div class="section-title">Parent/Guardian Consent</div>
+                        </div>
+                        <div class="section-content">
+                            As a parent or guardian, your consent is required for students under 16 years of age to participate in our program.
+                        </div>
+                        <div class="section-details">
+                            <h4>Parent/Guardian responsibilities:</h4>
+                            <ul>
+                                <li>Supervise and support your student's learning journey</li>
+                                <li>Ensure appropriate use of the platform and tools</li>
+                                <li>Communicate with instructors about your student's progress</li>
+                                <li>Review and approve any special projects or exhibitions</li>
+                            </ul>
+                            <h4>Educational partnership:</h4>
+                            <ul>
+                                <li>Regular progress updates and reports</li>
+                                <li>Parent access to student dashboard and projects</li>
+                                <li>Direct communication channel with instructors</li>
+                                <li>Involvement in student goal-setting and achievements</li>
+                            </ul>
+                        </div>
+                        <label class="consent-checkbox">
+                            <input type="checkbox" id="consent-parent" name="consent-parent" required>
+                            <span class="checkbox-label">I am the parent/guardian of this student and give full consent for their participation in CIFIX LEARN programs</span>
+                            <span class="required-badge">Required</span>
+                        </label>
+                    </div>
+
+                    <!-- School Authorization -->
+                    <div class="consent-section" id="section-school">
+                        <div class="section-header">
+                            <div class="section-icon">🏫</div>
+                            <div class="section-title">School Authorization</div>
+                        </div>
+                        <div class="section-content">
+                            Confirmation that your student's school supports and authorizes participation in supplemental AI coding education.
+                        </div>
+                        <div class="section-details">
+                            <h4>School partnership benefits:</h4>
+                            <ul>
+                                <li>Alignment with school's STEM education goals</li>
+                                <li>Complementary learning that enhances classroom education</li>
+                                <li>Potential integration with school computer science curriculum</li>
+                                <li>Progress reports available for school counselors/teachers</li>
+                            </ul>
+                            <h4>Educational coordination:</h4>
+                            <ul>
+                                <li>Respect for school schedule and academic priorities</li>
+                                <li>Flexible learning pace to accommodate school workload</li>
+                                <li>Educational outcomes reporting for school records</li>
+                                <li>Collaboration opportunities with school tech programs</li>
+                            </ul>
+                        </div>
+                        <label class="consent-checkbox">
+                            <input type="checkbox" id="consent-school" name="consent-school" required>
+                            <span class="checkbox-label">I confirm that the student's school is aware of and supports their participation in CIFIX LEARN</span>
+                            <span class="required-badge">Required</span>
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="error-message" id="error-message">
+                    Please review and agree to all consent items above to proceed with registration.
+                </div>
+
+                <button type="submit" class="submit-button" id="submit-btn" disabled>
+                    <span class="loading-spinner" id="loading-spinner"></span>
+                    Complete Registration & Proceed
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const submitBtn = document.getElementById('submit-btn');
+        const errorMessage = document.getElementById('error-message');
+        const progressCount = document.getElementById('progress-count');
+        const progressFill = document.getElementById('progress-fill');
+
+        // Update progress and button state
+        function updateProgress() {
+            const checkedCount = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            const totalCount = checkboxes.length;
+            
+            // Update progress text and bar
+            progressCount.textContent = `${checkedCount} of ${totalCount}`;
+            progressFill.style.width = `${(checkedCount / totalCount) * 100}%`;
+            
+            // Update section styling
+            checkboxes.forEach(checkbox => {
+                const section = checkbox.closest('.consent-section');
+                if (checkbox.checked) {
+                    section.classList.add('checked');
+                } else {
+                    section.classList.remove('checked');
+                }
+            });
+            
+            // Enable/disable submit button
+            submitBtn.disabled = checkedCount < totalCount;
+            
+            // Hide error message if all checked
+            if (checkedCount === totalCount) {
+                errorMessage.style.display = 'none';
+            }
+        }
+
+        // Add event listeners to checkboxes
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateProgress);
+        });
+
+        // Form submission
+        document.getElementById('consent-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const checkedCount = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            
+            if (checkedCount < checkboxes.length) {
+                errorMessage.style.display = 'block';
+                errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+            
+            submitForm();
+        });
+
+        function submitForm() {
+            const loadingSpinner = document.getElementById('loading-spinner');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            loadingSpinner.style.display = 'inline-block';
+            submitBtn.innerHTML = '<span class="loading-spinner"></span>Processing Consent Agreement...';
+
+            // Simulate processing
+            setTimeout(() => {
+                // Store consent data
+                const consentData = {
+                    dataStorageConsent: document.getElementById('consent-data').checked,
+                    marketingConsent: document.getElementById('consent-marketing').checked,
+                    parentConsent: document.getElementById('consent-parent').checked,
+                    schoolConsent: document.getElementById('consent-school').checked,
+                    consentTimestamp: new Date().toISOString()
+                };
+
+                // Get existing registration data
+                const existingData = JSON.parse(localStorage.getItem('completeRegistration') || '{}');
+                
+                // Add consent data
+                const completeRegistration = {
+                    ...existingData,
+                    consent: consentData,
+                    registrationComplete: true
+                };
+
+                localStorage.setItem('completeRegistration', JSON.stringify(completeRegistration));
+
+                // Redirect to signup complete page
+                window.location.href = 'signup-complete.html';
+            }, 2000);
+        }
+
+        // Check if user has completed previous steps
+        window.addEventListener('load', function() {
+            const registrationData = JSON.parse(localStorage.getItem('completeRegistration') || '{}');
+            
+            if (!registrationData.account || !registrationData.account.verified) {
+                alert('Please complete email verification first.');
+                window.location.href = 'email-verification.html';
+                return;
+            }
+
+            // Initialize progress
+            updateProgress();
+        });
+
+        // Add smooth scrolling for section focus
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('focus', function() {
+                this.closest('.consent-section').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

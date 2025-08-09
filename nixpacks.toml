@@ -1,0 +1,14 @@
+[phases.setup]
+nixPkgs = ["python39", "postgresql"]
+
+[phases.install]
+cmds = ["pip install -r backend/requirements.txt"]
+
+[phases.build]
+cmds = ["cd backend && python -c 'print(\"Build completed\")'"]
+
+[start]
+cmd = "cd backend && python main.py"
+
+[variables]
+PYTHONPATH = "/app:/app/backend"

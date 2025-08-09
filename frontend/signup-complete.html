@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Complete - CIFIX LEARN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #5B47B0;
+            --secondary-teal: #00D9C0;
+            --accent-pink: #FF6B9D;
+            --accent-yellow: #FFD93D;
+            --accent-orange: #FF8C42;
+            --bg-cream: #FBF9F7;
+            --text-dark: #2C2C3E;
+            --text-gray: #6B7280;
+            --white: #FFFFFF;
+            --success-green: #10B981;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--bg-cream) 0%, rgba(91, 71, 176, 0.05) 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(91, 71, 176, 0.3);
+            font-size: 0.9rem;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(91, 71, 176, 0.4);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 120px auto 0;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        /* Success Header */
+        .success-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: bounce 1s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .success-header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--success-green), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .success-header p {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Complete Container */
+        .complete-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .complete-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--success-green), var(--secondary-teal), var(--accent-yellow));
+        }
+
+        /* Registration Summary */
+        .registration-summary {
+            margin-bottom: 3rem;
+        }
+
+        .summary-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-card {
+            background: rgba(251, 249, 247, 0.5);
+            border: 2px solid #E5E7EB;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .summary-card:hover {
+            border-color: var(--secondary-teal);
+            background: rgba(0, 217, 192, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .card-content {
+            color: var(--text-gray);
+            line-height: 1.5;
+        }
+
+        .card-value {
+            font-weight: 600;
+            color: var(--secondary-teal);
+        }
+
+        /* Next Steps */
+        .next-steps {
+            margin-bottom: 3rem;
+        }
+
+        .steps-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .steps-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--success-green);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .step-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);
+        }
+
+        .step-number {
+            background: var(--success-green);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .step-description {
+            color: var(--text-gray);
+            line-height: 1.5;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .action-button {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(91, 71, 176, 0.3);
+        }
+
+        .action-button.primary {
+            background: linear-gradient(135deg, var(--success-green), var(--secondary-teal));
+            font-size: 1.2rem;
+            padding: 1.2rem 2.5rem;
+        }
+
+        .action-button.secondary {
+            background: linear-gradient(135deg, var(--text-gray), var(--text-dark));
+        }
+
+        /* Welcome Message */
+        .welcome-message {
+            background: linear-gradient(135deg, rgba(91, 71, 176, 0.1), rgba(0, 217, 192, 0.1));
+            border: 2px solid var(--secondary-teal);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-message h3 {
+            color: var(--secondary-teal);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .welcome-message p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .float-1 {
+            top: 15%;
+            left: 8%;
+            font-size: 2.5rem;
+            color: var(--success-green);
+            animation-delay: 0s;
+        }
+
+        .float-2 {
+            top: 50%;
+            right: 5%;
+            font-size: 2rem;
+            color: var(--secondary-teal);
+            animation-delay: 3s;
+        }
+
+        .float-3 {
+            bottom: 25%;
+            left: 10%;
+            font-size: 1.8rem;
+            color: var(--accent-yellow);
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(15deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+                margin-top: 100px;
+            }
+
+            .success-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .complete-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .floating-element {
+                display: none;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .nav-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Elements -->
+    <div class="floating-element float-1">🎉</div>
+    <div class="floating-element float-2">✨</div>
+    <div class="floating-element float-3">🚀</div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">CIFIX LEARN</div>
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-button">Home</a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Success Header -->
+        <div class="success-header">
+            <div class="success-icon">🎊</div>
+            <h1>Registration Complete!</h1>
+            <p>Welcome to CIFIX LEARN! Your student's AI coding journey is about to begin.</p>
+        </div>
+
+        <!-- Complete Container -->
+        <div class="complete-container">
+            
+            <!-- Welcome Message -->
+            <div class="welcome-message">
+                <h3>🚀 Ready for Takeoff!</h3>
+                <p>Congratulations! You've successfully completed the registration process. Your student is now enrolled in our AI coding program and ready to start their exciting journey into the world of programming and artificial intelligence.</p>
+            </div>
+
+            <!-- Registration Summary -->
+            <div class="registration-summary">
+                <h2 class="summary-title">Registration Summary</h2>
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <span class="card-icon">👨‍🎓</span>
+                        <h3 class="card-title">Student Information</h3>
+                        <div class="card-content">
+                            <div>Name: <span class="card-value" id="student-name">Loading...</span></div>
+                            <div>Age: <span class="card-value" id="student-age">Loading...</span></div>
+                            <div>Grade: <span class="card-value" id="student-grade">Loading...</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <span class="card-icon">📧</span>
+                        <h3 class="card-title">Account Details</h3>
+                        <div class="card-content">
+                            <div>Email: <span class="card-value" id="account-email">Loading...</span></div>
+                            <div>Username: <span class="card-value" id="account-username">Loading...</span></div>
+                            <div>Status: <span class="card-value">✅ Verified</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <span class="card-icon">🔒</span>
+                        <h3 class="card-title">Consent Status</h3>
+                        <div class="card-content">
+                            <div>Data Privacy: <span class="card-value">✅ Approved</span></div>
+                            <div>Marketing: <span class="card-value">✅ Approved</span></div>
+                            <div>Parental: <span class="card-value">✅ Approved</span></div>
+                            <div>School: <span class="card-value">✅ Approved</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <span class="card-icon">💻</span>
+                        <h3 class="card-title">Device Setup</h3>
+                        <div class="card-content">
+                            <div>Type: <span class="card-value" id="device-type">Loading...</span></div>
+                            <div>Model: <span class="card-value" id="device-model">Loading...</span></div>
+                            <div>Ready: <span class="card-value">✅ Configured</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="next-steps">
+                <h2 class="steps-title">What's Next?</h2>
+                <div class="steps-list">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Login to Your Account</h3>
+                            <p class="step-description">Use your username and password to access your personalized student dashboard and begin exploring the platform.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Complete Your Profile</h3>
+                            <p class="step-description">Set up your learning preferences, goals, and interests to get personalized course recommendations.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Start Your First Course</h3>
+                            <p class="step-description">Begin with our beginner-friendly AI fundamentals course designed specifically for your age group.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Join the Community</h3>
+                            <p class="step-description">Connect with other young coders, share projects, and participate in coding challenges and competitions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="#" class="action-button primary" onclick="proceedToLogin()">Login to Dashboard</a>
+                <a href="index.html" class="action-button secondary">Return to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load and display registration data
+        window.addEventListener('load', function() {
+            const registrationData = JSON.parse(localStorage.getItem('completeRegistration') || '{}');
+            
+            // Check if registration is actually complete
+            if (!registrationData.registrationComplete || !registrationData.consent) {
+                alert('Registration not complete. Please finish all steps first.');
+                window.location.href = 'consent-agreement.html';
+                return;
+            }
+
+            // Populate student information
+            if (registrationData.student) {
+                document.getElementById('student-name').textContent = registrationData.student.studentName || 'N/A';
+                document.getElementById('student-age').textContent = registrationData.student.studentAge ? `${registrationData.student.studentAge} years` : 'N/A';
+                document.getElementById('student-grade').textContent = registrationData.student.studentGrade || 'N/A';
+                document.getElementById('device-type').textContent = registrationData.student.deviceType || 'N/A';
+                document.getElementById('device-model').textContent = registrationData.student.deviceModel || 'N/A';
+            }
+
+            // Populate account information
+            if (registrationData.account) {
+                document.getElementById('account-email').textContent = registrationData.account.email || 'N/A';
+                document.getElementById('account-username').textContent = registrationData.account.username || 'N/A';
+            }
+
+            console.log('Registration Complete! Full data:', registrationData);
+        });
+
+        function proceedToLogin() {
+            // Mark that user should be redirected to dashboard after login
+            localStorage.setItem('loginRedirect', 'dashboard');
+            
+            // Redirect to login page
+            window.location.href = 'login.html';
+        }
+
+        // Add celebration confetti effect
+        function createConfetti() {
+            const colors = ['#5B47B0', '#00D9C0', '#FF6B9D', '#FFD93D', '#FF8C42'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'fixed';
+                    confetti.style.width = '10px';
+                    confetti.style.height = '10px';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.left = Math.random() * window.innerWidth + 'px';
+                    confetti.style.top = '-10px';
+                    confetti.style.zIndex = '9999';
+                    confetti.style.borderRadius = '50%';
+                    confetti.style.pointerEvents = 'none';
+                    
+                    document.body.appendChild(confetti);
+                    
+                    let position = -10;
+                    const fall = setInterval(() => {
+                        position += Math.random() * 3 + 2;
+                        confetti.style.top = position + 'px';
+                        confetti.style.left = (parseInt(confetti.style.left) + (Math.random() - 0.5) * 2) + 'px';
+                        
+                        if (position > window.innerHeight) {
+                            clearInterval(fall);
+                            confetti.remove();
+                        }
+                    }, 20);
+                }, i * 100);
+            }
+        }
+
+        // Trigger confetti on page load
+        setTimeout(createConfetti, 1000);
+    </script>
+</body>
+</html>

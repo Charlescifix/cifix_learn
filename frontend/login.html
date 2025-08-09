@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login - CIFIX LEARN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #5B47B0;
+            --secondary-teal: #00D9C0;
+            --accent-pink: #FF6B9D;
+            --accent-yellow: #FFD93D;
+            --accent-orange: #FF8C42;
+            --bg-cream: #FBF9F7;
+            --text-dark: #2C2C3E;
+            --text-gray: #6B7280;
+            --white: #FFFFFF;
+            --success-green: #10B981;
+            --error-red: #EF4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--bg-cream) 0%, rgba(91, 71, 176, 0.05) 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(91, 71, 176, 0.3);
+            font-size: 0.9rem;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(91, 71, 176, 0.4);
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, var(--text-gray), var(--text-dark));
+            box-shadow: 0 5px 15px rgba(107, 114, 128, 0.3);
+        }
+
+        .back-button:hover {
+            box-shadow: 0 8px 25px rgba(107, 114, 128, 0.4);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 500px;
+            margin: 120px auto 0;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Login Container */
+        .login-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--secondary-teal), var(--accent-yellow));
+        }
+
+        .login-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .login-subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: rgba(251, 249, 247, 0.5);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--secondary-teal);
+            box-shadow: 0 0 0 3px rgba(0, 217, 192, 0.1);
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-gray);
+        }
+
+        /* Password Toggle */
+        .password-container {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            padding: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .password-toggle:hover {
+            color: var(--secondary-teal);
+        }
+
+        /* Remember Me */
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .remember-checkbox {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .remember-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.8rem;
+            cursor: pointer;
+            accent-color: var(--secondary-teal);
+        }
+
+        .remember-checkbox label {
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-gray);
+            margin: 0;
+        }
+
+        .forgot-password {
+            color: var(--secondary-teal);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .forgot-password:hover {
+            color: var(--primary-purple);
+            text-decoration: underline;
+        }
+
+        /* Login Button */
+        .login-button {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            color: white;
+            padding: 1.2rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(91, 71, 176, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .login-button:hover:not(:disabled) {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(91, 71, 176, 0.4);
+        }
+
+        .login-button:disabled {
+            background: var(--text-gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Error Messages */
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid var(--error-red);
+            color: var(--error-red);
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            display: none;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .form-group.error input {
+            border-color: var(--error-red);
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+
+        /* Success Message */
+        .success-message {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--success-green);
+            color: var(--success-green);
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            display: none;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Divider */
+        .divider {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #E5E7EB;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 1rem;
+            color: var(--text-gray);
+            font-weight: 500;
+        }
+
+        /* Sign Up Link */
+        .signup-link {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(251, 249, 247, 0.5);
+            border-radius: 15px;
+            margin-top: 1rem;
+        }
+
+        .signup-link p {
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+
+        .signup-button {
+            background: linear-gradient(135deg, var(--text-gray), var(--text-dark));
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .signup-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(107, 114, 128, 0.3);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .float-1 {
+            top: 15%;
+            left: 8%;
+            font-size: 2.5rem;
+            color: var(--accent-pink);
+            animation-delay: 0s;
+        }
+
+        .float-2 {
+            top: 50%;
+            right: 5%;
+            font-size: 2rem;
+            color: var(--secondary-teal);
+            animation-delay: 3s;
+        }
+
+        .float-3 {
+            bottom: 25%;
+            left: 10%;
+            font-size: 1.8rem;
+            color: var(--accent-yellow);
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(15deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+                margin-top: 100px;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .login-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .login-title {
+                font-size: 1.8rem;
+            }
+
+            .remember-forgot {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .floating-element {
+                display: none;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .nav-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Elements -->
+    <div class="floating-element float-1">🔑</div>
+    <div class="floating-element float-2">👨‍🎓</div>
+    <div class="floating-element float-3">💻</div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">CIFIX LEARN</div>
+        <div class="nav-buttons">
+            <a href="signup-complete.html" class="nav-button back-button">← Back</a>
+            <a href="index.html" class="nav-button">Home</a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Welcome Back!</h1>
+            <p>Sign in to your student account and continue your AI coding journey.</p>
+        </div>
+
+        <!-- Login Container -->
+        <div class="login-container">
+            <h2 class="login-title">Student Login</h2>
+            <p class="login-subtitle">Enter your credentials to access your personalized dashboard and continue learning.</p>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Username or Email</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username or email address" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-container">
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword()">👁️</button>
+                    </div>
+                </div>
+
+                <div class="remember-forgot">
+                    <label class="remember-checkbox">
+                        <input type="checkbox" id="remember-me" name="remember-me">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-password" onclick="showForgotPassword()">Forgot password?</a>
+                </div>
+
+                <div class="error-message" id="error-message">
+                    Invalid username or password. Please try again.
+                </div>
+
+                <div class="success-message" id="success-message">
+                    Login successful! Redirecting to your dashboard...
+                </div>
+
+                <button type="submit" class="login-button" id="login-btn">
+                    <span class="loading-spinner" id="loading-spinner"></span>
+                    Sign In to Dashboard
+                </button>
+            </form>
+
+            <div class="divider">
+                <span>New to CIFIX LEARN?</span>
+            </div>
+
+            <div class="signup-link">
+                <p>Don't have an account yet? Join thousands of students learning AI and coding!</p>
+                <a href="summer-classes.html" class="signup-button">Create New Account</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form submission
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleLogin();
+        });
+
+        function handleLogin() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('remember-me').checked;
+            
+            // Clear previous messages
+            clearMessages();
+            
+            // Basic validation
+            if (!username || !password) {
+                showError('Please enter both username/email and password.');
+                return;
+            }
+            
+            // Show loading state
+            showLoading(true);
+            
+            // Simulate login process
+            setTimeout(() => {
+                validateLogin(username, password, rememberMe);
+            }, 1500);
+        }
+
+        function validateLogin(username, password, rememberMe) {
+            // Get stored registration data
+            const registrationData = JSON.parse(localStorage.getItem('completeRegistration') || '{}');
+            
+            if (!registrationData.account) {
+                showError('No account found. Please create an account first.');
+                showLoading(false);
+                return;
+            }
+            
+            const account = registrationData.account;
+            
+            // Check credentials (in real app, this would be server-side)
+            const isValidUsername = (username === account.username || username === account.email);
+            const isValidPassword = (password === account.password);
+            
+            if (isValidUsername && isValidPassword) {
+                // Successful login
+                showSuccess('Login successful! Redirecting to your dashboard...');
+                
+                // Store login session
+                const loginSession = {
+                    username: account.username,
+                    email: account.email,
+                    loginTime: new Date().toISOString(),
+                    rememberMe: rememberMe
+                };
+                
+                localStorage.setItem('currentUser', JSON.stringify(loginSession));
+                
+                // Redirect after delay
+                setTimeout(() => {
+                    const redirect = localStorage.getItem('loginRedirect');
+                    if (redirect === 'dashboard') {
+                        localStorage.removeItem('loginRedirect');
+                        window.location.href = 'student-dashboard.html';
+                    } else {
+                        window.location.href = 'student-dashboard.html';
+                    }
+                }, 2000);
+                
+            } else {
+                // Failed login
+                showError('Invalid username/email or password. Please check your credentials and try again.');
+                showLoading(false);
+                
+                // Shake effect for failed login
+                document.getElementById('login-btn').style.animation = 'shake 0.5s ease-in-out';
+                setTimeout(() => {
+                    document.getElementById('login-btn').style.animation = '';
+                }, 500);
+            }
+        }
+
+        function showLoading(show) {
+            const spinner = document.getElementById('loading-spinner');
+            const button = document.getElementById('login-btn');
+            
+            if (show) {
+                button.disabled = true;
+                spinner.style.display = 'inline-block';
+                button.innerHTML = '<span class="loading-spinner"></span>Signing In...';
+            } else {
+                button.disabled = false;
+                spinner.style.display = 'none';
+                button.innerHTML = 'Sign In to Dashboard';
+            }
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            
+            // Add error styling to form fields
+            document.getElementById('username').closest('.form-group').classList.add('error');
+            document.getElementById('password').closest('.form-group').classList.add('error');
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('success-message');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+        }
+
+        function clearMessages() {
+            document.getElementById('error-message').style.display = 'none';
+            document.getElementById('success-message').style.display = 'none';
+            
+            // Remove error styling
+            document.querySelectorAll('.form-group.error').forEach(group => {
+                group.classList.remove('error');
+            });
+        }
+
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleBtn = document.querySelector('.password-toggle');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleBtn.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggleBtn.textContent = '👁️';
+            }
+        }
+
+        function showForgotPassword() {
+            alert('Password reset functionality will be implemented. For now, please contact support at support@cifixlearn.com');
+        }
+
+        // Auto-focus username field
+        window.addEventListener('load', () => {
+            document.getElementById('username').focus();
+            
+            // Check if user is already logged in
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+            if (currentUser) {
+                if (confirm('You are already logged in. Continue to dashboard?')) {
+                    window.location.href = 'student-dashboard.html';
+                }
+            }
+        });
+
+        // Clear messages when user starts typing
+        document.getElementById('username').addEventListener('input', clearMessages);
+        document.getElementById('password').addEventListener('input', clearMessages);
+
+        // Add keyboard shortcut for login (Enter key)
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !document.getElementById('login-btn').disabled) {
+                handleLogin();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Testing - CIFIX LEARN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #5B47B0;
+            --secondary-teal: #00D9C0;
+            --bg-cream: #FBF9F7;
+            --text-dark: #2C2C3E;
+            --text-gray: #6B7280;
+            --white: #FFFFFF;
+            --success-green: #10B981;
+            --error-red: #EF4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, var(--bg-cream) 0%, rgba(91, 71, 176, 0.05) 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .test-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--secondary-teal);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(91, 71, 176, 0.3);
+        }
+
+        .btn:disabled {
+            background: var(--text-gray);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .result.success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--success-green);
+            color: var(--success-green);
+        }
+
+        .result.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid var(--error-red);
+            color: var(--error-red);
+        }
+
+        .config-section {
+            background: rgba(255, 255, 0, 0.1);
+            border: 2px solid #FFD93D;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .config-section h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            border-left: 4px solid var(--secondary-teal);
+            margin: 1rem 0;
+        }
+
+        .email-preview {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📧 Email Testing Tool</h1>
+            <p>Test your AWS SES email configuration and templates</p>
+        </div>
+
+        <div class="config-section">
+            <h3>⚠️ Configuration Required</h3>
+            <p>Before testing emails, make sure you have:</p>
+            <ul style="margin-left: 2rem; margin-top: 1rem;">
+                <li>Added your AWS credentials to the <code>.env</code> file</li>
+                <li>Verified your email address in AWS SES</li>
+                <li>Set up the backend email service</li>
+            </ul>
+        </div>
+
+        <!-- Email Configuration Test -->
+        <div class="test-section">
+            <h2 class="section-title">1. Test Email Configuration</h2>
+            <button class="btn" onclick="testConfig()">Test AWS SES Connection</button>
+            <div id="config-result" class="result"></div>
+        </div>
+
+        <!-- Verification Email Test -->
+        <div class="test-section">
+            <h2 class="section-title">2. Test Verification Email</h2>
+            <div class="form-group">
+                <label for="test-email">Test Email Address:</label>
+                <input type="email" id="test-email" placeholder="Enter your email address">
+            </div>
+            <div class="form-group">
+                <label for="test-name">Student Name:</label>
+                <input type="text" id="test-name" placeholder="Test Student" value="Test Student">
+            </div>
+            <button class="btn" onclick="sendVerificationEmail()">Send Verification Email</button>
+            <div id="verification-result" class="result"></div>
+        </div>
+
+        <!-- Welcome Email Test -->
+        <div class="test-section">
+            <h2 class="section-title">3. Test Welcome Email</h2>
+            <button class="btn" onclick="sendWelcomeEmail()">Send Welcome Email</button>
+            <div id="welcome-result" class="result"></div>
+        </div>
+
+        <!-- OTP Generation Test -->
+        <div class="test-section">
+            <h2 class="section-title">4. Test OTP Generation</h2>
+            <button class="btn" onclick="generateTestOTP()">Generate OTP Code</button>
+            <div id="otp-result" class="result"></div>
+        </div>
+
+        <!-- Email Template Preview -->
+        <div class="test-section">
+            <h2 class="section-title">5. Email Template Previews</h2>
+            <button class="btn" onclick="previewVerificationTemplate()">Preview Verification Email</button>
+            <button class="btn" onclick="previewWelcomeTemplate()">Preview Welcome Email</button>
+            <div id="template-preview" class="email-preview" style="display: none;"></div>
+        </div>
+
+        <!-- Debug Information -->
+        <div class="test-section">
+            <h2 class="section-title">6. Debug Information</h2>
+            <button class="btn" onclick="showDebugInfo()">Show Debug Info</button>
+            <div id="debug-info" class="code-block" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Include Email Service -->
+    <script src="email-service.js"></script>
+
+    <script>
+        let emailService;
+
+        // Initialize email service
+        window.addEventListener('load', function() {
+            try {
+                emailService = new EmailService();
+                console.log('Email service initialized');
+            } catch (error) {
+                console.error('Failed to initialize email service:', error);
+            }
+        });
+
+        function testConfig() {
+            const resultDiv = document.getElementById('config-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            
+            // Simulate configuration test
+            setTimeout(() => {
+                if (!emailService) {
+                    showResult('config-result', false, 'Email service not initialized');
+                    return;
+                }
+
+                // In demo mode, always show success
+                showResult('config-result', true, 'Configuration test passed (demo mode). AWS SES credentials would be validated here in production.');
+            }, 1000);
+        }
+
+        function sendVerificationEmail() {
+            const email = document.getElementById('test-email').value;
+            const name = document.getElementById('test-name').value;
+            const resultDiv = document.getElementById('verification-result');
+
+            if (!email) {
+                showResult('verification-result', false, 'Please enter an email address');
+                return;
+            }
+
+            if (!emailService) {
+                showResult('verification-result', false, 'Email service not available');
+                return;
+            }
+
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.textContent = 'Sending verification email...';
+
+            const otpCode = emailService.generateOTP();
+
+            emailService.sendVerificationEmail(email, otpCode, name)
+                .then(result => {
+                    showResult('verification-result', true, `Verification email sent successfully! OTP Code: ${otpCode} (Check console for full details)`);
+                })
+                .catch(error => {
+                    showResult('verification-result', false, `Failed to send email: ${error.message}`);
+                });
+        }
+
+        function sendWelcomeEmail() {
+            const email = document.getElementById('test-email').value || 'test@example.com';
+            const name = document.getElementById('test-name').value || 'Test Student';
+
+            if (!emailService) {
+                showResult('welcome-result', false, 'Email service not available');
+                return;
+            }
+
+            emailService.sendWelcomeEmail(email, name, 'test_user')
+                .then(result => {
+                    showResult('welcome-result', true, 'Welcome email sent successfully! (Check console for details)');
+                })
+                .catch(error => {
+                    showResult('welcome-result', false, `Failed to send email: ${error.message}`);
+                });
+        }
+
+        function generateTestOTP() {
+            if (!emailService) {
+                showResult('otp-result', false, 'Email service not available');
+                return;
+            }
+
+            const otp = emailService.generateOTP();
+            showResult('otp-result', true, `Generated OTP: <strong>${otp}</strong>`);
+        }
+
+        function previewVerificationTemplate() {
+            if (!emailService) return;
+
+            const template = emailService.getVerificationEmailTemplate()
+                .replace('{{studentName}}', 'John Doe')
+                .replace('{{otpCode}}', '123456')
+                .replace('{{expiryTime}}', '10 minutes');
+
+            document.getElementById('template-preview').innerHTML = template;
+            document.getElementById('template-preview').style.display = 'block';
+        }
+
+        function previewWelcomeTemplate() {
+            if (!emailService) return;
+
+            const template = emailService.getWelcomeEmailTemplate()
+                .replace('{{studentName}}', 'John Doe')
+                .replace('{{username}}', 'johndoe')
+                .replace(/{{loginUrl}}/g, 'https://cifixlearn.com/login');
+
+            document.getElementById('template-preview').innerHTML = template;
+            document.getElementById('template-preview').style.display = 'block';
+        }
+
+        function showDebugInfo() {
+            const debugDiv = document.getElementById('debug-info');
+            
+            const debugInfo = `
+Environment Configuration:
+- Email Service: ${emailService ? 'Loaded' : 'Not loaded'}
+- Demo Mode: Active
+- AWS Region: us-east-1 (from config)
+- Timestamp: ${new Date().toISOString()}
+
+Current Settings:
+- Source Email: ${emailService?.config?.sourceEmail || 'Not configured'}
+- Region: ${emailService?.config?.region || 'Not configured'}
+
+Browser Information:
+- User Agent: ${navigator.userAgent}
+- Local Storage Available: ${typeof Storage !== "undefined"}
+
+Console Logs:
+Check the browser console (F12) for detailed email sending logs.
+            `;
+
+            debugDiv.textContent = debugInfo;
+            debugDiv.style.display = 'block';
+        }
+
+        function showResult(elementId, success, message) {
+            const resultDiv = document.getElementById(elementId);
+            resultDiv.style.display = 'block';
+            resultDiv.className = `result ${success ? 'success' : 'error'}`;
+            resultDiv.innerHTML = message;
+        }
+
+        // Auto-populate test email from localStorage if available
+        window.addEventListener('load', function() {
+            const registrationData = JSON.parse(localStorage.getItem('completeRegistration') || '{}');
+            if (registrationData.account?.email) {
+                document.getElementById('test-email').value = registrationData.account.email;
+                document.getElementById('test-name').value = registrationData.student?.studentName || 'Test Student';
+            }
+        });
+    </script>
+</body>
+</html>

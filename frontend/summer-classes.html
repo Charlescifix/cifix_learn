@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summer Classes - CIFIX LEARN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #5B47B0;
+            --secondary-teal: #00D9C0;
+            --accent-pink: #FF6B9D;
+            --accent-yellow: #FFD93D;
+            --bg-cream: #FBF9F7;
+            --text-dark: #2C2C3E;
+            --text-gray: #6B7280;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--bg-cream) 0%, rgba(91, 71, 176, 0.05) 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(91, 71, 176, 0.3);
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(91, 71, 176, 0.4);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 120px auto 0;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* AI Quote Styles */
+        .ai-quote {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            position: relative;
+            border-left: 5px solid var(--secondary-teal);
+        }
+
+        .ai-quote::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--secondary-teal);
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-family: serif;
+        }
+
+        .ai-quote p {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+        }
+
+        .ai-quote .author {
+            font-weight: 600;
+            color: var(--primary-purple);
+            text-align: right;
+            font-size: 0.95rem;
+        }
+
+        .quote-1 { border-left-color: var(--accent-pink); }
+        .quote-1::before { color: var(--accent-pink); }
+        .quote-1 .author { color: var(--accent-pink); }
+
+        .quote-2 { border-left-color: var(--accent-yellow); }
+        .quote-2::before { color: var(--accent-yellow); }
+        .quote-2 .author { color: var(--accent-yellow); }
+
+        .quote-3 { border-left-color: var(--secondary-teal); }
+        .quote-3::before { color: var(--secondary-teal); }
+        .quote-3 .author { color: var(--secondary-teal); }
+
+        /* Form Container */
+        .form-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-purple), var(--secondary-teal), var(--accent-pink));
+        }
+
+        .form-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .form-subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: rgba(251, 249, 247, 0.5);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--secondary-teal);
+            box-shadow: 0 0 0 3px rgba(0, 217, 192, 0.1);
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-gray);
+        }
+
+        /* Next Button */
+        .next-button {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            color: white;
+            padding: 1.2rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(91, 71, 176, 0.3);
+            margin-top: 1rem;
+        }
+
+        .next-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(91, 71, 176, 0.4);
+        }
+
+        .next-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .float-1 {
+            top: 20%;
+            left: 5%;
+            font-size: 2rem;
+            color: var(--accent-pink);
+            animation-delay: 0s;
+        }
+
+        .float-2 {
+            top: 60%;
+            right: 10%;
+            font-size: 1.5rem;
+            color: var(--secondary-teal);
+            animation-delay: 2s;
+        }
+
+        .float-3 {
+            bottom: 20%;
+            left: 15%;
+            font-size: 1.8rem;
+            color: var(--accent-yellow);
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, rgba(0, 217, 192, 0.1), rgba(91, 71, 176, 0.1));
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 2rem;
+            border: 2px solid var(--secondary-teal);
+        }
+
+        .success-message h3 {
+            color: var(--secondary-teal);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-message p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+                margin-top: 100px;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .form-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .form-title {
+                font-size: 2rem;
+            }
+
+            .floating-element {
+                display: none;
+            }
+
+            .ai-quote {
+                padding: 1.5rem;
+                margin: 1.5rem 0;
+            }
+
+            .ai-quote p {
+                font-size: 1rem;
+                padding-left: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Elements -->
+    <div class="floating-element float-1">🤖</div>
+    <div class="floating-element float-2">💻</div>
+    <div class="floating-element float-3">🚀</div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">CIFIX LEARN</div>
+        <a href="index.html" class="back-button">← Back to Home</a>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Summer Classes</h1>
+            <p>Join our exclusive AI coding summer program designed for young innovators ready to shape the future!</p>
+        </div>
+
+        <!-- AI Quote 1 -->
+        <div class="ai-quote quote-1">
+            <p>The future belongs to young minds who can dance with artificial intelligence, not fear it. Every child who learns to code today is writing tomorrow's world.</p>
+            <div class="author">— Dr. Sarah Chen, AI Education Pioneer</div>
+        </div>
+
+        <!-- Registration Form -->
+        <div class="form-container">
+            <h2 class="form-title">School Registration</h2>
+            <p class="form-subtitle">Please provide your school details to get started with our summer AI coding program. We'll create a customized learning experience for your students.</p>
+            
+            <form id="registration-form">
+                <div class="form-group">
+                    <label for="school-name">Name of School</label>
+                    <input type="text" id="school-name" name="school-name" placeholder="Enter your school's full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="head-teacher">Name of Head Teacher</label>
+                    <input type="text" id="head-teacher" name="head-teacher" placeholder="Enter the head teacher's full name" required>
+                </div>
+
+                <button type="submit" class="next-button">Next →</button>
+            </form>
+
+            <div class="success-message" id="success-message">
+                <h3>🎉 Registration Successful!</h3>
+                <p>Thank you for registering! We'll contact you within 24 hours to discuss the next steps for your summer AI coding program.</p>
+            </div>
+        </div>
+
+        <!-- AI Quote 2 -->
+        <div class="ai-quote quote-2">
+            <p>Teaching children AI is not about replacing human creativity—it's about amplifying it. When kids understand how machines learn, they become the architects of intelligence itself.</p>
+            <div class="author">— Prof. Michael Rodriguez, MIT AI Lab</div>
+        </div>
+
+        <!-- AI Quote 3 -->
+        <div class="ai-quote quote-3">
+            <p>In the hands of a child, artificial intelligence becomes a paintbrush for dreams. Every algorithm they write, every model they train, is a step toward a more innovative and inclusive future.</p>
+            <div class="author">— Dr. Amara Okafor, Stanford AI Ethics Institute</div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registration-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const schoolName = document.getElementById('school-name').value;
+            const headTeacher = document.getElementById('head-teacher').value;
+            
+            if (schoolName.trim() && headTeacher.trim()) {
+                // Store school data in localStorage for now (will be replaced with database later)
+                const schoolData = {
+                    schoolName,
+                    headTeacher,
+                    timestamp: new Date().toISOString()
+                };
+                
+                localStorage.setItem('schoolRegistration', JSON.stringify(schoolData));
+                
+                // Show success message briefly then redirect
+                document.getElementById('registration-form').style.display = 'none';
+                document.getElementById('success-message').style.display = 'block';
+                
+                // Scroll to success message
+                document.getElementById('success-message').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+                
+                // Redirect to student details page after 2 seconds
+                setTimeout(() => {
+                    window.location.href = 'student-details.html';
+                }, 2000);
+                
+                console.log('School Data Saved:', schoolData);
+            }
+        });
+
+        // Add some interactive hover effects for the quotes
+        document.querySelectorAll('.ai-quote').forEach(quote => {
+            quote.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+                this.style.boxShadow = '0 15px 40px rgba(0, 0, 0, 0.15)';
+            });
+            
+            quote.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+            });
+        });
+    </script>
+</body>
+</html>

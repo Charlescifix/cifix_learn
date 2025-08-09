@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details - CIFIX LEARN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #5B47B0;
+            --secondary-teal: #00D9C0;
+            --accent-pink: #FF6B9D;
+            --accent-yellow: #FFD93D;
+            --accent-orange: #FF8C42;
+            --bg-cream: #FBF9F7;
+            --text-dark: #2C2C3E;
+            --text-gray: #6B7280;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--bg-cream) 0%, rgba(91, 71, 176, 0.05) 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(91, 71, 176, 0.3);
+            font-size: 0.9rem;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(91, 71, 176, 0.4);
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, var(--text-gray), var(--text-dark));
+            box-shadow: 0 5px 15px rgba(107, 114, 128, 0.3);
+        }
+
+        .back-button:hover {
+            box-shadow: 0 8px 25px rgba(107, 114, 128, 0.4);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            top: 90px;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 999;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #E5E7EB;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-purple), var(--secondary-teal));
+            width: 66%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            font-weight: 600;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 180px auto 0;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--secondary-teal), var(--accent-yellow));
+        }
+
+        .form-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .form-subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Form Grid */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: rgba(251, 249, 247, 0.5);
+            appearance: none;
+        }
+
+        .form-group select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 1rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 3rem;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary-teal);
+            box-shadow: 0 0 0 3px rgba(0, 217, 192, 0.1);
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-gray);
+        }
+
+        /* Device Type Radio Buttons */
+        .device-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .device-option {
+            position: relative;
+        }
+
+        .device-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .device-option label {
+            display: block;
+            padding: 1.5rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(251, 249, 247, 0.5);
+            position: relative;
+            margin-bottom: 0;
+            font-weight: 600;
+        }
+
+        .device-option label:hover {
+            border-color: var(--secondary-teal);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .device-option input[type="radio"]:checked + label {
+            border-color: var(--secondary-teal);
+            background: rgba(0, 217, 192, 0.1);
+            color: var(--secondary-teal);
+        }
+
+        .device-option .device-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Submit Button */
+        .submit-button {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            color: white;
+            padding: 1.2rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(91, 71, 176, 0.3);
+            margin-top: 2rem;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(91, 71, 176, 0.4);
+        }
+
+        .submit-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, rgba(0, 217, 192, 0.1), rgba(91, 71, 176, 0.1));
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 2rem;
+            border: 2px solid var(--secondary-teal);
+        }
+
+        .success-message h3 {
+            color: var(--secondary-teal);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .success-message p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .success-button {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .success-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(91, 71, 176, 0.3);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .float-1 {
+            top: 15%;
+            left: 8%;
+            font-size: 2.5rem;
+            color: var(--accent-pink);
+            animation-delay: 0s;
+        }
+
+        .float-2 {
+            top: 50%;
+            right: 5%;
+            font-size: 2rem;
+            color: var(--secondary-teal);
+            animation-delay: 3s;
+        }
+
+        .float-3 {
+            bottom: 25%;
+            left: 10%;
+            font-size: 1.8rem;
+            color: var(--accent-yellow);
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(15deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+                margin-top: 160px;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .form-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .form-title {
+                font-size: 1.8rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .device-options {
+                grid-template-columns: 1fr;
+            }
+
+            .floating-element {
+                display: none;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .nav-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .success-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Elements -->
+    <div class="floating-element float-1">📚</div>
+    <div class="floating-element float-2">🎯</div>
+    <div class="floating-element float-3">⚡</div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">CIFIX LEARN</div>
+        <div class="nav-buttons">
+            <a href="summer-classes.html" class="nav-button back-button">← Back</a>
+            <a href="index.html" class="nav-button">Home</a>
+        </div>
+    </nav>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <div class="progress-text">Step 2 of 3: Student Details</div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Student Information</h1>
+            <p>Tell us about your student to personalize their AI coding journey and ensure the best learning experience.</p>
+        </div>
+
+        <!-- Student Details Form -->
+        <div class="form-container">
+            <h2 class="form-title">Student Details</h2>
+            <p class="form-subtitle">Please provide the following information about the student who will be participating in our summer AI coding program.</p>
+            
+            <form id="student-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="student-name">Name of Student</label>
+                        <input type="text" id="student-name" name="student-name" placeholder="Enter student's full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="student-age">Student Age</label>
+                        <select id="student-age" name="student-age" required>
+                            <option value="">Select age</option>
+                            <option value="6">6 years old</option>
+                            <option value="7">7 years old</option>
+                            <option value="8">8 years old</option>
+                            <option value="9">9 years old</option>
+                            <option value="10">10 years old</option>
+                            <option value="11">11 years old</option>
+                            <option value="12">12 years old</option>
+                            <option value="13">13 years old</option>
+                            <option value="14">14 years old</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="student-grade">Class/Grade</label>
+                        <select id="student-grade" name="student-grade" required>
+                            <option value="">Select grade</option>
+                            <option value="Grade 1">Grade 1</option>
+                            <option value="Grade 2">Grade 2</option>
+                            <option value="Grade 3">Grade 3</option>
+                            <option value="Grade 4">Grade 4</option>
+                            <option value="Grade 5">Grade 5</option>
+                            <option value="Grade 6">Grade 6</option>
+                            <option value="Grade 7">Grade 7</option>
+                            <option value="Grade 8">Grade 8</option>
+                            <option value="Grade 9">Grade 9</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Type of Device</label>
+                        <div class="device-options">
+                            <div class="device-option">
+                                <input type="radio" id="laptop" name="device-type" value="laptop" required>
+                                <label for="laptop">
+                                    <span class="device-icon">💻</span>
+                                    Laptop
+                                </label>
+                            </div>
+                            <div class="device-option">
+                                <input type="radio" id="desktop" name="device-type" value="desktop" required>
+                                <label for="desktop">
+                                    <span class="device-icon">🖥️</span>
+                                    Desktop
+                                </label>
+                            </div>
+                            <div class="device-option">
+                                <input type="radio" id="tablet" name="device-type" value="tablet" required>
+                                <label for="tablet">
+                                    <span class="device-icon">📱</span>
+                                    Tablet
+                                </label>
+                            </div>
+                            <div class="device-option">
+                                <input type="radio" id="chromebook" name="device-type" value="chromebook" required>
+                                <label for="chromebook">
+                                    <span class="device-icon">⚡</span>
+                                    Chromebook
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="device-model">Device Model</label>
+                        <input type="text" id="device-model" name="device-model" placeholder="e.g., MacBook Pro 2021, iPad Air, HP Pavilion, etc." required>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-button">Continue to Account Setup →</button>
+            </form>
+
+            <div class="success-message" id="success-message">
+                <h3>🎉 Student Information Saved!</h3>
+                <p>Great! We have all the student details. Now let's create your secure account to access personalized learning features and track progress throughout the AI coding journey.</p>
+                <div class="success-actions">
+                    <a href="#" class="success-button" onclick="continueToNext()">Create Account</a>
+                    <a href="index.html" class="success-button" style="background: linear-gradient(135deg, var(--text-gray), var(--text-dark));">Return Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('student-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const studentName = document.getElementById('student-name').value;
+            const studentAge = document.getElementById('student-age').value;
+            const studentGrade = document.getElementById('student-grade').value;
+            const deviceType = document.querySelector('input[name="device-type"]:checked')?.value;
+            const deviceModel = document.getElementById('device-model').value;
+            
+            if (studentName.trim() && studentAge && studentGrade && deviceType && deviceModel.trim()) {
+                // Store data in localStorage for now (will be replaced with database later)
+                const studentData = {
+                    studentName,
+                    studentAge,
+                    studentGrade,
+                    deviceType,
+                    deviceModel,
+                    timestamp: new Date().toISOString()
+                };
+                
+                // Get existing school data
+                const schoolData = JSON.parse(localStorage.getItem('schoolRegistration') || '{}');
+                
+                // Combine data
+                const completeData = {
+                    ...schoolData,
+                    student: studentData
+                };
+                
+                localStorage.setItem('completeRegistration', JSON.stringify(completeData));
+                
+                // Hide the form
+                document.getElementById('student-form').style.display = 'none';
+                
+                // Show success message
+                document.getElementById('success-message').style.display = 'block';
+                
+                // Update progress bar to 100%
+                document.querySelector('.progress-fill').style.width = '100%';
+                document.querySelector('.progress-text').textContent = 'Step 2 of 3: Complete!';
+                
+                // Scroll to success message
+                document.getElementById('success-message').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+                
+                console.log('Complete Registration Data:', completeData);
+            }
+        });
+
+        function continueToNext() {
+            // Redirect to the account signup page
+            window.location.href = 'signup-account.html';
+        }
+
+        // Load school data if available
+        window.addEventListener('load', function() {
+            const schoolData = JSON.parse(localStorage.getItem('schoolRegistration') || '{}');
+            if (!schoolData.schoolName) {
+                // If no school data, redirect back
+                alert('Please complete the school registration first.');
+                window.location.href = 'summer-classes.html';
+            }
+        });
+
+        // Add some interactive effects for device selection
+        document.querySelectorAll('.device-option label').forEach(label => {
+            label.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px)';
+                this.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.1)';
+            });
+            
+            label.addEventListener('mouseleave', function() {
+                if (!this.previousElementSibling.checked) {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

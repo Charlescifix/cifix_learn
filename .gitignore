@@ -1,16 +1,164 @@
-# Ignore PyCharm settings
-.idea/
-
-# Ignore Mac OS files
-.DS_Store
-
-# Ignore Python cache files (if you ever run local servers)
-__pycache__/
-*.pyc
-*.pyo
-
-# Node modules (in case you ever expand to add npm tooling)
-node_modules/
-
-# Environment files
+# Environment variables
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# next.js build output
+.next
+
+# nuxt.js build output
+.nuxt
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# AWS
+.aws/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Database
+*.db
+*.sqlite3
+
+# Backup files
+*.bak
+*.backup
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Build outputs
+dist/
+build/
+
+# Security files and secrets
+*secret*
+*key*
+*keys*
+*credentials*
+*token*
+*tokens*
+aws-credentials*
+config.json
+*.pem
+*.crt
+*.key
+
+# Railway deployment
+.railway/
+
+# API Keys
+openai.key
+stripe.key
+mailgun.key
+sendgrid.key
+
+# Cloud provider credentials
+gcp-service-account.json
+azure-credentials.json
+digitalocean.json
+
+# Additional sensitive patterns
+private/
+ssl/
+certificates/
+.ssh/
+sensitive_data/
+user_data/
+exports/
+uploads/private/
