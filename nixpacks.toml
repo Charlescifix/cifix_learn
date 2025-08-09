@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["python3", "python3Packages.pip", "postgresql", "stdenv.cc.cc.lib", "gcc"]
+nixPkgs = ["python3", "python3Packages.pip", "python3Packages.greenlet", "postgresql", "gcc", "glibc"]
 
 [phases.install]
 cmds = ["pip install --break-system-packages -r backend/requirements.txt"]
