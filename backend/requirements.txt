@@ -44,3 +44,6 @@ structlog==23.2.0
 # Background Tasks (lightweight)
 celery==5.3.4
 redis==5.0.1
+
+# Async support for SQLAlchemy
+greenlet==3.0.3
