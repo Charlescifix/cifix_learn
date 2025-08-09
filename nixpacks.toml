@@ -8,7 +8,7 @@ cmds = ["python -m venv /tmp/venv", "source /tmp/venv/bin/activate && pip instal
 cmds = ["cd backend && python -c 'print(\"Build completed\")'"]
 
 [start]
-cmd = "source /tmp/venv/bin/activate && cd backend && python main.py"
+cmd = "/tmp/venv/bin/python backend/main.py"
 
 [variables]
 PYTHONPATH = "/app:/app/backend"
